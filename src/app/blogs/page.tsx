@@ -1,158 +1,118 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
 import BlogCard from "@/components/BlogCard";
 import { blogPosts, blogCategories } from "@/lib/data";
 import { Search } from "lucide-react";
 
+const C = { cr:"#8B0E18",gold:"#D4A853",blush:"#F7EDE4",cream:"#FDFAF4",ink:"#1A0A0A",stone:"#7A5C52" };
+
 export default function BlogsPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
+  const [cat, setCat]     = useState("All");
+  const [q, setQ]         = useState("");
+  const [page, setPage]   = useState(1);
+  const PER = 6;
+  const featuredPost = blogPosts.find(p=>p.featured);
 
-  const featuredPost = blogPosts.find((p) => p.featured);
-
-  const filtered = blogPosts.filter((post) => {
-    const matchesCategory =
-      activeCategory === "All" || post.category === activeCategory;
-    const matchesSearch =
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+  const filtered = blogPosts.filter(p => {
+    const mc = cat==="All" || p.category===cat;
+    const mq = p.title.toLowerCase().includes(q.toLowerCase()) || p.excerpt.toLowerCase().includes(q.toLowerCase());
+    return mc && mq;
   });
-
-  const totalPages = Math.ceil(filtered.length / postsPerPage);
-  const paginated = filtered.slice(
-    (currentPage - 1) * postsPerPage,
-    currentPage * postsPerPage
-  );
+  const totalPages = Math.ceil(filtered.length/PER);
+  const paged = filtered.slice((page-1)*PER, page*PER);
 
   return (
     <>
-      {/* Header */}
-      <section className="bg-[#1C1410] pt-40 pb-24 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <Image
-            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
+      {/* HERO — z-index pattern */}
+      <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6" style={{ background: C.ink, minHeight:"360px" }}>
+        <div className="absolute inset-0 z-0">
+          <Image src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70"
+            alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" />
         </div>
-        <div className="relative max-w-4xl mx-auto text-center">
-          <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60 block mb-4">
-            The Journal
-          </span>
-          <h1
-            className="text-5xl md:text-6xl text-white leading-tight mb-6"
-            style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
-          >
+        <div className="absolute inset-0 z-10"
+          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.35),rgba(26,10,10,.97))" }} />
+        <div className="relative z-20 max-w-4xl mx-auto text-center">
+          <motion.div className="flex items-center justify-center gap-3 mb-5"
+            initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
+            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
+            <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(212,168,83,.7)" }}>The Journal</span>
+            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
+          </motion.div>
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-5"
+            style={{ fontFamily:"'TheSeasons',Georgia,serif" }}
+            initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
+            transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Stories &amp; Reflections
-          </h1>
-          <p className="text-white/60 text-lg max-w-xl mx-auto">
-            Thoughtful writing on midlife, creativity, wellness, relationships,
-            and reinvention.
-          </p>
+          </motion.h1>
+          <motion.p className="text-sm sm:text-lg max-w-xl mx-auto"
+            style={{ color:"rgba(245,239,230,.52)" }}
+            initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.65 }}>
+            Thoughtful writing on midlife, creativity, wellness, relationships, and reinvention.
+          </motion.p>
         </div>
       </section>
 
-      {/* Search + Filter */}
-      <section className="bg-[#FAF7EE] py-10 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
-          {/* Search */}
-          <div className="relative w-full md:w-80">
-            <Search
-              size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#5C0511]/50"
-            />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full bg-white border border-[#5C0511]/20 text-[#1C1410] text-sm pl-10 pr-4 py-3 focus:outline-none focus:border-[#5C0511] placeholder:text-[#6B5E54]/50"
-            />
+      {/* SEARCH + FILTER */}
+      <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
+        style={{ background: C.cream, borderBottom:`1px solid rgba(139,14,24,.1)` }}>
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-between">
+          <div className="relative w-full sm:w-72">
+            <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color:"rgba(139,14,24,.45)" }} />
+            <input type="text" placeholder="Search articles..." value={q}
+              onChange={e=>{ setQ(e.target.value); setPage(1); }}
+              className="w-full text-sm pl-10 pr-4 py-3 focus:outline-none transition-colors"
+              style={{ background:"#fff", border:"1px solid rgba(139,14,24,.18)", color: C.ink }}
+              onFocus={e=>(e.target.style.borderColor=C.cr)} onBlur={e=>(e.target.style.borderColor="rgba(139,14,24,.18)")} />
           </div>
-          {/* Categories */}
           <div className="flex flex-wrap gap-2 justify-center">
-            {blogCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {
-                  setActiveCategory(cat);
-                  setCurrentPage(1);
-                }}
-                className={`text-xs tracking-widest uppercase px-4 py-2 transition-colors ${
-                  activeCategory === cat
-                    ? "bg-[#5C0511] text-white"
-                    : "bg-white text-[#1C1410] border border-[#5C0511]/20 hover:border-[#5C0511] hover:text-[#5C0511]"
-                }`}
-              >
-                {cat}
-              </button>
+            {blogCategories.map(c=>(
+              <motion.button key={c} onClick={()=>{ setCat(c); setPage(1); }}
+                className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
+                style={ cat===c ? { background: C.cr, color:"#fff" } : { background:"#fff", color: C.ink, border:"1px solid rgba(139,14,24,.2)" }}
+                whileHover={{ scale:1.04 }} whileTap={{ scale:.96 }}>{c}</motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Post */}
-      {featuredPost && activeCategory === "All" && !searchQuery && (
-        <section className="bg-[#FAF7EE] py-12 px-6">
+      {/* FEATURED */}
+      {featuredPost && cat==="All" && !q && (
+        <section className="py-10 sm:py-12 px-4 sm:px-6" style={{ background: C.cream }}>
           <div className="max-w-7xl mx-auto">
-            <SectionReveal>
-              <BlogCard post={featuredPost} featured />
-            </SectionReveal>
+            <SectionReveal><BlogCard post={featuredPost} featured /></SectionReveal>
           </div>
         </section>
       )}
 
-      {/* Posts Grid */}
-      <section className="bg-[#FAF7EE] py-12 px-6 pb-24">
+      {/* GRID */}
+      <section className="py-8 sm:py-12 px-4 sm:px-6 pb-20 sm:pb-28" style={{ background: C.cream }}>
         <div className="max-w-7xl mx-auto">
-          {paginated.length > 0 ? (
+          {paged.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-                {paginated.map((post, i) => (
-                  <SectionReveal key={post.id} delay={i * 60}>
-                    <BlogCard post={post} />
-                  </SectionReveal>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
+                {paged.map((p,i)=>(
+                  <SectionReveal key={p.id} delay={i*60}><BlogCard post={p} /></SectionReveal>
                 ))}
               </div>
-
-              {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex justify-center gap-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => (
-                      <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={`w-10 h-10 text-sm transition-colors ${
-                          currentPage === page
-                            ? "bg-[#5C0511] text-white"
-                            : "border border-[#5C0511]/30 text-[#1C1410] hover:border-[#5C0511] hover:text-[#5C0511]"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    )
-                  )}
+                  {Array.from({length:totalPages},(_,i)=>i+1).map(pg=>(
+                    <button key={pg} onClick={()=>setPage(pg)}
+                      className="w-10 h-10 text-sm transition-colors"
+                      style={ pg===page ? { background: C.cr, color:"#fff" } : { border:`1px solid rgba(139,14,24,.3)`, color: C.ink }}>
+                      {pg}
+                    </button>
+                  ))}
                 </div>
               )}
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-[#6B5E54] text-lg">
-                No articles found. Try a different search or category.
-              </p>
+              <p className="text-lg" style={{ color: C.stone }}>No articles found. Try a different search or category.</p>
             </div>
           )}
         </div>
