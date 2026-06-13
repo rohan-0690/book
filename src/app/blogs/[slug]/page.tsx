@@ -28,15 +28,15 @@ export default async function BlogPost({ params }:Props) {
       {/* HERO — proper z-index */}
       <section className="relative pt-36 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6" style={{ background:"#1A0A0A", minHeight:"380px" }}>
         <div className="absolute inset-0 z-0">
-          <Image src={post.image} alt={post.title} fill className="object-cover" style={{ opacity:.3 }} sizes="100vw" priority />
+          <Image src={post.image} alt={post.title} fill className="object-cover" style={{ opacity:.2 }} sizes="100vw" priority />
         </div>
         <div className="absolute inset-0 z-10"
-          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.25),rgba(26,10,10,.92))" }} />
+          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.55),rgba(26,10,10,.97))" }} />
         <div className="relative z-20 max-w-4xl mx-auto w-full">
           <span className="text-white text-xs tracking-widest uppercase px-3 py-1 inline-block mb-5"
             style={{ background:"linear-gradient(135deg,#8B0E18,#A8192A)" }}>{post.category}</span>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl text-white leading-tight mb-5"
-            style={{ fontFamily:"'TheSeasons',Georgia,serif" }}>{post.title}</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-5"
+            style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}>{post.title}</h1>
           <div className="flex flex-wrap items-center gap-3 text-sm" style={{ color:"rgba(245,239,230,.6)" }}>
             <span>{post.author}</span>
             <span style={{ color:"#D4A853" }}>·</span>

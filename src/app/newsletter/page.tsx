@@ -55,8 +55,8 @@ export default function NewsletterPage() {
             <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(255,255,255,.6)" }}>Community</span>
             <span className="h-px w-8" style={{ background:"rgba(255,255,255,.3)" }} />
           </motion.div>
-          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-5"
-            style={{ fontFamily:"'TheSeasons',Georgia,serif" }}
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-5"
+            style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
             initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
             transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Join the Become.ing

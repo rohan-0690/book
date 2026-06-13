@@ -60,8 +60,8 @@ export default function Home() {
             </motion.div>
 
             <motion.h1 variants={fadeUp}
-              className="text-[2.8rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] text-white leading-[1.05] mb-6 sm:mb-8"
-              style={{ fontFamily:"'TheSeasons',Georgia,serif" }}>
+              className="text-[2.8rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[1.05] mb-6 sm:mb-8"
+              style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}>
               Midlife is not an ending.
               <br />
               <motion.span style={{ color: C.goldLt }} className="italic"

@@ -34,7 +34,7 @@ export default function BlogsPage() {
             alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" />
         </div>
         <div className="absolute inset-0 z-10"
-          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.35),rgba(26,10,10,.97))" }} />
+          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.6),rgba(26,10,10,.99))" }} />
         <div className="relative z-20 max-w-4xl mx-auto text-center">
           <motion.div className="flex items-center justify-center gap-3 mb-5"
             initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
@@ -42,8 +42,8 @@ export default function BlogsPage() {
             <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(212,168,83,.7)" }}>The Journal</span>
             <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
           </motion.div>
-          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-5"
-            style={{ fontFamily:"'TheSeasons',Georgia,serif" }}
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-5"
+            style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
             initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
             transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Stories &amp; Reflections

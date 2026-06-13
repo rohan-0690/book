@@ -47,6 +47,12 @@ body {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'TheSeasons', Georgia, 'Times New Roman', serif;
   font-weight: 400;
+  /* No global color — each element sets its own so dark heroes work */
+}
+
+/* Light sections: dark text */
+.text-section h1, .text-section h2, .text-section h3,
+.text-section h4, .text-section h5, .text-section h6 {
   color: #1A0A0A;
 }
 

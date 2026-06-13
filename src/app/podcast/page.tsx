@@ -31,7 +31,7 @@ export default function PodcastPage() {
             alt="" fill className="object-cover" style={{ opacity:.22 }} sizes="100vw" priority />
         </div>
         <div className="absolute inset-0 z-10"
-          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.35),rgba(26,10,10,.97))" }} />
+          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.6),rgba(26,10,10,.99))" }} />
         {/* gold accent line */}
         <div className="absolute top-0 left-0 right-0 z-20 h-px"
           style={{ background:"linear-gradient(90deg,transparent,rgba(212,168,83,.5),transparent)" }} />
@@ -42,8 +42,8 @@ export default function PodcastPage() {
             <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(212,168,83,.7)" }}>Media</span>
             <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
           </motion.div>
-          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-5"
-            style={{ fontFamily:"'TheSeasons',Georgia,serif" }}
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-5"
+            style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
             initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
             transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Podcast &amp; YouTube
