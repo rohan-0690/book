@@ -89,8 +89,8 @@ export default function PodcastPage() {
             <SectionReveal>
               <span className="text-xs tracking-widest uppercase block mb-6" style={{ color: C.gold }}>Latest Episode</span>
               <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden shadow-lg" style={{ background: C.cream }}>
-                {/* paddingBottom image */}
-                <div className="relative w-full overflow-hidden" style={{ paddingBottom:"66.67%" }}>
+                {/* podcast featured episode — fixed height */}
+                <div className="relative w-full overflow-hidden" style={{ height: "340px" }}>
                   <Image src={featured.image} alt={featured.title} fill className="object-cover"
                     sizes="(max-width:1024px) 100vw, 50vw" />
                   <div className="absolute inset-0 flex items-center justify-center"

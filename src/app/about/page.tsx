@@ -58,7 +58,7 @@ export default function AboutPage() {
             </SectionReveal>
             <SectionReveal direction="left" delay={150} className="order-1 lg:order-2">
               <div className="relative">
-                <div className="relative w-full overflow-hidden" style={{ paddingBottom:"133.33%" }}>
+                <div className="relative w-full overflow-hidden" style={{ height: "500px" }}>
                   <Image src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=800&q=80"
                     alt="Karishma Chhatrapati" fill className="object-cover transition-transform duration-700 hover:scale-105"
                     sizes="(max-width:1024px) 100vw, 50vw" />
@@ -80,7 +80,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 items-center">
             <SectionReveal direction="right">
               <div className="relative">
-                <div className="relative w-full overflow-hidden" style={{ paddingBottom:"133.33%" }}>
+                <div className="relative w-full overflow-hidden" style={{ height: "500px" }}>
                   <Image src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80"
                     alt="Ila" fill className="object-cover transition-transform duration-700 hover:scale-105"
                     sizes="(max-width:1024px) 100vw, 50vw" />

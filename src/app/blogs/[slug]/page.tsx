@@ -83,7 +83,7 @@ export default async function BlogPost({ params }:Props) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
             {related.map(p=>(
               <Link key={p.id} href={`/blogs/${p.slug}`} className="group flex flex-col">
-                <div className="relative w-full overflow-hidden mb-4" style={{ paddingBottom:"66.67%" }}>
+                <div className="relative w-full overflow-hidden mb-4" style={{ height: "180px" }}>
                   <Image src={p.image} alt={p.title} fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width:640px) 100vw, 33vw" />

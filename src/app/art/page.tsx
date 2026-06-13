@@ -77,12 +77,12 @@ export default function ArtPage() {
                 <motion.div key={art.id} className="masonry-item"
                   initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}
                   transition={{ duration:.5, delay:(i%6)*.07, ease:[.22,1,.36,1] }}>
-                  {/* paddingBottom establishes height — Image sits absolute */}
+                  {/* fixed height per card — NO paddingBottom */}
                   <div className="relative w-full overflow-hidden cursor-pointer group"
-                    style={{ paddingBottom:`${PB[i%PB.length]}%` }}
-                    onClick={()=>setSelected(art)}
-                    onMouseEnter={()=>setHovId(art.id)}
-                    onMouseLeave={()=>setHovId(null)}>
+                    style={{ height: `${PB[i % PB.length] * 1.8}px` }}
+                    onClick={() => setSelected(art)}
+                    onMouseEnter={() => setHovId(art.id)}
+                    onMouseLeave={() => setHovId(null)}>
                     <Image src={art.image} alt={art.title} fill
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" />
@@ -152,10 +152,10 @@ export default function ArtPage() {
                   <ChevronRight size={18} />
                 </motion.button>
               )}
-              {/* Image */}
+              {/* Artwork image — fixed height */}
               <AnimatePresence mode="wait">
                 <motion.div key={`img-${selected.id}`}
-                  className="relative w-full overflow-hidden flex-shrink-0" style={{ paddingBottom:"75%" }}
+                  className="relative w-full overflow-hidden flex-shrink-0" style={{ height: "380px" }}
                   initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:.3 }}>
                   <Image src={selected.image} alt={selected.title} fill className="object-cover"
                     sizes="(max-width:768px) 100vw, 60vw" />

@@ -138,8 +138,7 @@ export default function Home() {
 
             <SectionReveal direction="left" delay={150}>
               <div className="relative mt-8 lg:mt-0">
-                {/* paddingBottom for reliable height */}
-                <div className="relative w-full overflow-hidden" style={{ paddingBottom:"125%" }}>
+                <div className="relative w-full overflow-hidden" style={{ height: "480px" }}>
                   <Image src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
                     alt="Become.ing community" fill className="object-cover transition-transform duration-700 hover:scale-105"
                     sizes="(max-width:1024px) 100vw, 50vw" />
@@ -253,8 +252,8 @@ export default function Home() {
           <SectionReveal delay={80}>
             <motion.div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden shadow-xl" style={{ background: C.cream }}
               whileHover={{ boxShadow:"0 24px 64px rgba(139,14,24,.14)" }}>
-              {/* paddingBottom image */}
-              <div className="relative w-full overflow-hidden" style={{ paddingBottom:"66.67%" }}>
+              {/* podcast latest episode image — fixed height */}
+              <div className="relative w-full overflow-hidden" style={{ height: "340px" }}>
                 <Image src={latestEpisode.image} alt={latestEpisode.title} fill className="object-cover"
                   sizes="(max-width:1024px) 100vw, 50vw" />
                 <div className="absolute inset-0 flex items-center justify-center" style={{ background:"rgba(26,10,10,.35)" }}>
@@ -320,7 +319,7 @@ export default function Home() {
                 <motion.div className="group flex flex-col cursor-pointer"
                   onHoverStart={()=>setHovBook(book.id)} onHoverEnd={()=>setHovBook(null)}>
                   {/* paddingBottom for book covers */}
-                  <motion.div className="relative w-full overflow-hidden mb-3 sm:mb-4" style={{ paddingBottom:"133.33%" }}
+                  <motion.div className="relative w-full overflow-hidden mb-3 sm:mb-4" style={{ height: "240px" }}
                     animate={{ y: hovBook===book.id ? -8 : 0, boxShadow: hovBook===book.id ? "0 24px 48px rgba(139,14,24,.22)" : "0 4px 18px rgba(0,0,0,.1)" }}
                     transition={{ duration:.4, ease:[.22,1,.36,1] }}>
                     <Image src={book.cover} alt={book.title} fill
@@ -366,7 +365,7 @@ export default function Home() {
             {featuredArt.map((art,i)=>(
               <SectionReveal key={art.id} delay={i*70}>
                 <div className="group relative w-full overflow-hidden cursor-pointer"
-                  style={{ paddingBottom: i%2===0 ? "133.33%" : "100%" }}
+                  style={{ height: i%2===0 ? "280px" : "210px" }}
                   onMouseEnter={()=>setHovArt(art.id)} onMouseLeave={()=>setHovArt(null)}>
                   <Image src={art.image} alt={art.title} fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"

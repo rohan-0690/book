@@ -71,8 +71,8 @@ export default function BooksPage() {
                   initial={{ opacity:0, y:18 }} animate={{ opacity:1, y:0 }}
                   transition={{ duration:.45, delay:i*.05, ease:[.22,1,.36,1] }}
                   onHoverStart={()=>setHov(book.id)} onHoverEnd={()=>setHov(null)}>
-                  {/* Cover — paddingBottom trick */}
-                  <motion.div className="relative w-full overflow-hidden mb-3 sm:mb-4" style={{ paddingBottom:"133.33%" }}
+                  {/* Cover — fixed height */}
+                  <motion.div className="relative w-full overflow-hidden mb-3 sm:mb-4" style={{ height: "220px" }}
                     animate={{ y: hov===book.id ? -10 : 0, boxShadow: hov===book.id ? "0 24px 48px rgba(139,14,24,.22)" : "0 4px 18px rgba(0,0,0,.1)" }}
                     transition={{ duration:.4, ease:[.22,1,.36,1] }}>
                     <Image src={book.cover} alt={book.title} fill
