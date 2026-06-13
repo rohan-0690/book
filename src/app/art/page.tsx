@@ -39,7 +39,7 @@ export default function ArtPage() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-[#1e1010] pt-40 pb-28 px-6 relative overflow-hidden">
+      <section className="bg-[#1C1410] pt-40 pb-28 px-6 relative overflow-hidden">
         <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.08 }}
@@ -54,7 +54,7 @@ export default function ArtPage() {
             sizes="100vw"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#70090F]/15 via-[#1e1010]/65 to-[#1e1010]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#5C0511]/15 via-[#1C1410]/65 to-[#1C1410]" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
@@ -63,11 +63,11 @@ export default function ArtPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <span className="h-px w-8 bg-[#FFE9DF]/30" />
-            <span className="text-xs tracking-widest uppercase text-[#FFE9DF]/60">
+            <span className="h-px w-8 bg-[#F5E6D8]/30" />
+            <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60">
               Art Collective
             </span>
-            <span className="h-px w-8 bg-[#FFE9DF]/30" />
+            <span className="h-px w-8 bg-[#F5E6D8]/30" />
           </motion.div>
 
           <motion.h1
@@ -79,7 +79,7 @@ export default function ArtPage() {
           >
             Become.ing
             <br />
-            <span className="italic text-[#FFE9DF]">Art Collective</span>
+            <span className="italic text-[#F5E6D8]">Art Collective</span>
           </motion.h1>
 
           <motion.p
@@ -95,7 +95,7 @@ export default function ArtPage() {
       </section>
 
       {/* ── FILTER BAR ───────────────────────────────────── */}
-      <section className="bg-[#F8F6E7] py-8 px-6 border-b border-[#70090F]/10 sticky top-20 z-30">
+      <section className="bg-[#FAF7EE] py-8 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
           {artists.map((artist) => (
             <motion.button
@@ -103,8 +103,8 @@ export default function ArtPage() {
               onClick={() => setActiveArtist(artist)}
               className={`text-xs tracking-widest uppercase px-4 py-2 transition-colors duration-200 ${
                 activeArtist === artist
-                  ? "bg-[#70090F] text-white"
-                  : "bg-white text-[#2C2C2C] border border-[#70090F]/20 hover:border-[#70090F] hover:text-[#70090F]"
+                  ? "bg-[#5C0511] text-white"
+                  : "bg-white text-[#1C1410] border border-[#5C0511]/20 hover:border-[#5C0511] hover:text-[#5C0511]"
               }`}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
@@ -116,7 +116,7 @@ export default function ArtPage() {
       </section>
 
       {/* ── MASONRY GALLERY ──────────────────────────────── */}
-      <section className="bg-[#F8F6E7] py-16 px-6 pb-24">
+      <section className="bg-[#FAF7EE] py-16 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
           {/* 
             NOTE: We deliberately avoid Framer Motion `layout` on a CSS-columns
@@ -169,7 +169,7 @@ export default function ArtPage() {
                     <AnimatePresence>
                       {hoveredId === artwork.id && (
                         <motion.div
-                          className="absolute inset-0 bg-[#70090F]/80 flex flex-col items-center justify-center gap-3 p-6"
+                          className="absolute inset-0 bg-[#5C0511]/80 flex flex-col items-center justify-center gap-3 p-6"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -222,11 +222,11 @@ export default function ArtPage() {
             onClick={() => setSelected(null)}
           >
             {/* Backdrop blur */}
-            <div className="absolute inset-0 bg-[#1e1010]/92 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-[#1C1410]/92 backdrop-blur-sm" />
 
             {/* Panel */}
             <motion.div
-              className="relative max-w-5xl w-full grid grid-cols-1 md:grid-cols-[1fr_340px] bg-[#F8F6E7] overflow-hidden shadow-2xl"
+              className="relative max-w-5xl w-full grid grid-cols-1 md:grid-cols-[1fr_340px] bg-[#FAF7EE] overflow-hidden shadow-2xl"
               style={{ maxHeight: "90vh" }}
               initial={{ scale: 0.93, y: 24, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -237,7 +237,7 @@ export default function ArtPage() {
               {/* Close button */}
               <motion.button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-20 w-9 h-9 bg-[#2C2C2C] text-white flex items-center justify-center hover:bg-[#70090F] transition-colors"
+                className="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1C1410] text-white flex items-center justify-center hover:bg-[#5C0511] transition-colors"
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ duration: 0.2 }}
@@ -250,7 +250,7 @@ export default function ArtPage() {
               {currentIndex > 0 && (
                 <motion.button
                   onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white flex items-center justify-center hover:bg-[#70090F] transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white flex items-center justify-center hover:bg-[#5C0511] transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   aria-label="Previous artwork"
@@ -263,7 +263,7 @@ export default function ArtPage() {
               {currentIndex < filtered.length - 1 && (
                 <motion.button
                   onClick={(e) => { e.stopPropagation(); goNext(); }}
-                  className="absolute right-[356px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white items-center justify-center hover:bg-[#70090F] transition-colors hidden md:flex"
+                  className="absolute right-[356px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white items-center justify-center hover:bg-[#5C0511] transition-colors hidden md:flex"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   aria-label="Next artwork"
@@ -304,18 +304,18 @@ export default function ArtPage() {
                   transition={{ duration: 0.35, delay: 0.05 }}
                 >
                   <div>
-                    <span className="text-xs tracking-widest uppercase text-[#70090F] block mb-3">
+                    <span className="text-xs tracking-widest uppercase text-[#5C0511] block mb-3">
                       {selected.medium}
                     </span>
                     <h2
-                      className="text-3xl text-[#2C2C2C] mb-2 leading-tight"
+                      className="text-3xl text-[#1C1410] mb-2 leading-tight"
                       style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                     >
                       {selected.title}
                     </h2>
-                    <p className="text-sm text-[#70090F] mb-1">{selected.artist}</p>
-                    <p className="text-xs text-[#4A4A4A] mb-6">{selected.width}</p>
-                    <p className="text-sm text-[#4A4A4A] leading-relaxed">
+                    <p className="text-sm text-[#5C0511] mb-1">{selected.artist}</p>
+                    <p className="text-xs text-[#6B5E54] mb-6">{selected.width}</p>
+                    <p className="text-sm text-[#6B5E54] leading-relaxed">
                       {selected.description}
                     </p>
                   </div>
@@ -324,7 +324,7 @@ export default function ArtPage() {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 flex items-center justify-center gap-2 bg-[#70090F] text-white text-sm tracking-widest uppercase px-6 py-4 hover:bg-[#560008] transition-colors"
+                    className="mt-8 flex items-center justify-center gap-2 bg-[#5C0511] text-white text-sm tracking-widest uppercase px-6 py-4 hover:bg-[#8B1A24] transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.97 }}
                   >

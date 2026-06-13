@@ -35,9 +35,9 @@ export default function NewsletterPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-[#70090F] pt-40 pb-28 px-6 relative overflow-hidden">
+      <section className="bg-[#5C0511] pt-40 pb-28 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #FFE9DF, transparent 60%), radial-gradient(circle at 80% 50%, #FFE9DF, transparent 60%)" }}
+          style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #F5E6D8, transparent 60%), radial-gradient(circle at 80% 50%, #F5E6D8, transparent 60%)" }}
         />
         {/* Floating decorative circles */}
         <motion.div
@@ -71,7 +71,7 @@ export default function NewsletterPage() {
           >
             Join the Become.ing
             <br />
-            <span className="italic text-[#FFE9DF]">Community</span>
+            <span className="italic text-[#F5E6D8]">Community</span>
           </motion.h1>
           <motion.p
             className="text-white/65 text-lg max-w-xl mx-auto"
@@ -86,7 +86,7 @@ export default function NewsletterPage() {
       </section>
 
       {/* Form + Perks */}
-      <section className="bg-[#F8F6E7] py-28 px-6">
+      <section className="bg-[#FAF7EE] py-28 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Form Card */}
           <SectionReveal direction="right">
@@ -109,15 +109,15 @@ export default function NewsletterPage() {
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
                     >
-                      <CheckCircle2 size={60} className="text-[#70090F] mx-auto mb-6" />
+                      <CheckCircle2 size={60} className="text-[#5C0511] mx-auto mb-6" />
                     </motion.div>
                     <h2
-                      className="text-3xl text-[#2C2C2C] mb-4"
+                      className="text-3xl text-[#1C1410] mb-4"
                       style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                     >
                       Welcome to the Community
                     </h2>
-                    <p className="text-[#4A4A4A] leading-relaxed">
+                    <p className="text-[#6B5E54] leading-relaxed">
                       Thank you, <strong>{name}</strong>. You are now part of the
                       Become.ing community. Watch your inbox for thoughtful
                       reflections and updates.
@@ -126,12 +126,12 @@ export default function NewsletterPage() {
                 ) : (
                   <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }}>
                     <h2
-                      className="text-3xl text-[#2C2C2C] mb-2"
+                      className="text-3xl text-[#1C1410] mb-2"
                       style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                     >
                       Subscribe to Our Newsletter
                     </h2>
-                    <p className="text-[#4A4A4A] text-sm leading-relaxed mb-8">
+                    <p className="text-[#6B5E54] text-sm leading-relaxed mb-8">
                       Join thousands of women navigating their most meaningful chapter.
                     </p>
 
@@ -142,7 +142,7 @@ export default function NewsletterPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                       >
-                        <label htmlFor="name" className="text-xs tracking-widest uppercase text-[#4A4A4A] block mb-2">
+                        <label htmlFor="name" className="text-xs tracking-widest uppercase text-[#6B5E54] block mb-2">
                           Full Name
                         </label>
                         <motion.input
@@ -151,8 +151,8 @@ export default function NewsletterPage() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your full name"
-                          className="w-full bg-[#F8F6E7] border border-[#70090F]/20 text-[#2C2C2C] text-sm px-4 py-3.5 focus:outline-none focus:border-[#70090F] placeholder:text-[#4A4A4A]/40 transition-colors"
-                          whileFocus={{ borderColor: "#70090F", backgroundColor: "#fff" }}
+                          className="w-full bg-[#FAF7EE] border border-[#5C0511]/20 text-[#1C1410] text-sm px-4 py-3.5 focus:outline-none focus:border-[#5C0511] placeholder:text-[#6B5E54]/40 transition-colors"
+                          whileFocus={{ borderColor: "#5C0511", backgroundColor: "#fff" }}
                           required
                         />
                       </motion.div>
@@ -163,7 +163,7 @@ export default function NewsletterPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <label htmlFor="email" className="text-xs tracking-widest uppercase text-[#4A4A4A] block mb-2">
+                        <label htmlFor="email" className="text-xs tracking-widest uppercase text-[#6B5E54] block mb-2">
                           Email Address
                         </label>
                         <motion.input
@@ -172,8 +172,8 @@ export default function NewsletterPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="your@email.com"
-                          className="w-full bg-[#F8F6E7] border border-[#70090F]/20 text-[#2C2C2C] text-sm px-4 py-3.5 focus:outline-none focus:border-[#70090F] placeholder:text-[#4A4A4A]/40 transition-colors"
-                          whileFocus={{ borderColor: "#70090F", backgroundColor: "#fff" }}
+                          className="w-full bg-[#FAF7EE] border border-[#5C0511]/20 text-[#1C1410] text-sm px-4 py-3.5 focus:outline-none focus:border-[#5C0511] placeholder:text-[#6B5E54]/40 transition-colors"
+                          whileFocus={{ borderColor: "#5C0511", backgroundColor: "#fff" }}
                           required
                         />
                       </motion.div>
@@ -182,7 +182,7 @@ export default function NewsletterPage() {
                       <AnimatePresence>
                         {error && (
                           <motion.p
-                            className="text-sm text-[#70090F]"
+                            className="text-sm text-[#5C0511]"
                             initial={{ opacity: 0, y: -4 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0 }}
@@ -196,7 +196,7 @@ export default function NewsletterPage() {
                       <motion.button
                         type="submit"
                         disabled={loading}
-                        className="relative overflow-hidden bg-[#70090F] text-white text-sm tracking-widest uppercase px-8 py-4 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                        className="relative overflow-hidden bg-[#5C0511] text-white text-sm tracking-widest uppercase px-8 py-4 disabled:opacity-60 disabled:cursor-not-allowed mt-2"
                         whileHover={!loading ? { scale: 1.02 } : {}}
                         whileTap={!loading ? { scale: 0.98 } : {}}
                       >
@@ -225,7 +225,7 @@ export default function NewsletterPage() {
                       </motion.button>
                     </form>
 
-                    <p className="text-xs text-[#4A4A4A]/50 mt-6">
+                    <p className="text-xs text-[#6B5E54]/50 mt-6">
                       We respect your privacy. Unsubscribe at any time. No spam, ever.
                     </p>
                   </motion.div>
@@ -237,9 +237,9 @@ export default function NewsletterPage() {
           {/* Perks */}
           <SectionReveal direction="left" delay={150}>
             <div>
-              <span className="text-xs tracking-widest uppercase text-[#70090F] block mb-6">What to Expect</span>
+              <span className="text-xs tracking-widest uppercase text-[#5C0511] block mb-6">What to Expect</span>
               <h2
-                className="text-4xl text-[#2C2C2C] mb-10 leading-tight"
+                className="text-4xl text-[#1C1410] mb-10 leading-tight"
                 style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
               >
                 A letter written just for you
@@ -260,12 +260,12 @@ export default function NewsletterPage() {
                     </div>
                     <div>
                       <h4
-                        className="text-base text-[#2C2C2C] mb-1 group-hover:text-[#70090F] transition-colors"
+                        className="text-base text-[#1C1410] mb-1 group-hover:text-[#5C0511] transition-colors"
                         style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                       >
                         {item.title}
                       </h4>
-                      <p className="text-sm text-[#4A4A4A] leading-relaxed">{item.desc}</p>
+                      <p className="text-sm text-[#6B5E54] leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -276,17 +276,17 @@ export default function NewsletterPage() {
       </section>
 
       {/* Testimonial */}
-      <section className="bg-[#FFE9DF] py-24 px-6">
+      <section className="bg-[#F5E6D8] py-24 px-6">
         <SectionReveal direction="none">
           <div className="max-w-3xl mx-auto text-center">
             <motion.div
-              className="text-5xl text-[#70090F]/20 mb-4 select-none"
+              className="text-5xl text-[#5C0511]/20 mb-4 select-none"
               style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
             >
               &ldquo;
             </motion.div>
             <blockquote
-              className="text-2xl md:text-3xl text-[#2C2C2C] italic leading-relaxed font-light"
+              className="text-2xl md:text-3xl text-[#1C1410] italic leading-relaxed font-light"
               style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
             >
               Become.ing is the only newsletter I read word for word, every
@@ -294,11 +294,11 @@ export default function NewsletterPage() {
               exactly as you are.
             </blockquote>
             <div className="mt-8 flex items-center justify-center gap-4">
-              <span className="h-px w-8 bg-[#70090F]/30" />
-              <cite className="text-sm text-[#70090F] not-italic tracking-widest uppercase">
+              <span className="h-px w-8 bg-[#5C0511]/30" />
+              <cite className="text-sm text-[#5C0511] not-italic tracking-widest uppercase">
                 Subscriber, Mumbai
               </cite>
-              <span className="h-px w-8 bg-[#70090F]/30" />
+              <span className="h-px w-8 bg-[#5C0511]/30" />
             </div>
           </div>
         </SectionReveal>

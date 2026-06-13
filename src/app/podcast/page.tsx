@@ -28,7 +28,7 @@ export default function PodcastPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-[#2C2C2C] pt-40 pb-24 px-6 relative overflow-hidden">
+      <section className="bg-[#1C1410] pt-40 pb-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <Image
             src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1800&q=70"
@@ -39,7 +39,7 @@ export default function PodcastPage() {
           />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
-          <span className="text-xs tracking-widest uppercase text-[#FFE9DF]/60 block mb-4">
+          <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60 block mb-4">
             Media
           </span>
           <h1
@@ -56,19 +56,19 @@ export default function PodcastPage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <a
               href="#"
-              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#FFE9DF] hover:text-[#FFE9DF] transition-colors"
+              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#F5E6D8] hover:text-[#F5E6D8] transition-colors"
             >
               <Headphones size={16} /> Spotify
             </a>
             <a
               href="#"
-              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#FFE9DF] hover:text-[#FFE9DF] transition-colors"
+              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#F5E6D8] hover:text-[#F5E6D8] transition-colors"
             >
               <Headphones size={16} /> Apple Podcasts
             </a>
             <a
               href="#"
-              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#FFE9DF] hover:text-[#FFE9DF] transition-colors"
+              className="inline-flex items-center gap-2 border border-white/30 text-white/80 text-xs tracking-widest uppercase px-5 py-3 hover:border-[#F5E6D8] hover:text-[#F5E6D8] transition-colors"
             >
               <YoutubeIcon size={16} /> YouTube
             </a>
@@ -77,19 +77,19 @@ export default function PodcastPage() {
       </section>
 
       {/* Search */}
-      <section className="bg-[#F8F6E7] py-8 px-6 border-b border-[#70090F]/10 sticky top-20 z-30">
+      <section className="bg-[#FAF7EE] py-8 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
         <div className="max-w-7xl mx-auto">
           <div className="relative max-w-md">
             <Search
               size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#70090F]/50"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#5C0511]/50"
             />
             <input
               type="text"
               placeholder="Search episodes..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full bg-white border border-[#70090F]/20 text-[#2C2C2C] text-sm pl-10 pr-4 py-3 focus:outline-none focus:border-[#70090F] placeholder:text-[#4A4A4A]/50"
+              className="w-full bg-white border border-[#5C0511]/20 text-[#1C1410] text-sm pl-10 pr-4 py-3 focus:outline-none focus:border-[#5C0511] placeholder:text-[#6B5E54]/50"
             />
           </div>
         </div>
@@ -97,10 +97,10 @@ export default function PodcastPage() {
 
       {/* Featured Episode */}
       {featured && (
-        <section className="bg-[#FFE9DF] py-16 px-6">
+        <section className="bg-[#F5E6D8] py-16 px-6">
           <div className="max-w-7xl mx-auto">
             <SectionReveal>
-              <span className="text-xs tracking-widest uppercase text-[#70090F] block mb-8">
+              <span className="text-xs tracking-widest uppercase text-[#5C0511] block mb-8">
                 Latest Episode
               </span>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white shadow-sm overflow-hidden">
@@ -112,38 +112,38 @@ export default function PodcastPage() {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-[#2C2C2C]/20 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-[#70090F] flex items-center justify-center hover:bg-[#560008] transition-colors cursor-pointer shadow-xl">
+                  <div className="absolute inset-0 bg-[#1C1410]/20 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-[#5C0511] flex items-center justify-center hover:bg-[#8B1A24] transition-colors cursor-pointer shadow-xl">
                       <Play size={28} className="text-white ml-1" />
                     </div>
                   </div>
-                  <div className="absolute top-4 left-4 bg-[#70090F] text-white text-xs tracking-widest uppercase px-3 py-1">
+                  <div className="absolute top-4 left-4 bg-[#5C0511] text-white text-xs tracking-widest uppercase px-3 py-1">
                     Episode {featured.episode}
                   </div>
                 </div>
                 <div className="flex flex-col justify-center p-10 lg:p-14">
                   <h2
-                    className="text-3xl text-[#2C2C2C] mb-5 leading-snug"
+                    className="text-3xl text-[#1C1410] mb-5 leading-snug"
                     style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                   >
                     {featured.title}
                   </h2>
-                  <p className="text-[#4A4A4A] leading-relaxed mb-4">
+                  <p className="text-[#6B5E54] leading-relaxed mb-4">
                     {featured.description}
                   </p>
-                  <p className="text-xs text-[#70090F] mb-8">
+                  <p className="text-xs text-[#5C0511] mb-8">
                     {featured.date} · {featured.duration}
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <a
                       href={featured.youtubeUrl}
-                      className="inline-flex items-center gap-2 bg-[#70090F] text-white text-xs tracking-widest uppercase px-5 py-3 hover:bg-[#560008] transition-colors"
+                      className="inline-flex items-center gap-2 bg-[#5C0511] text-white text-xs tracking-widest uppercase px-5 py-3 hover:bg-[#8B1A24] transition-colors"
                     >
                       <YoutubeIcon size={14} /> Watch on YouTube
                     </a>
                     <a
                       href={featured.spotifyUrl}
-                      className="inline-flex items-center gap-2 border border-[#70090F] text-[#70090F] text-xs tracking-widest uppercase px-5 py-3 hover:bg-[#FFE9DF] transition-colors"
+                      className="inline-flex items-center gap-2 border border-[#5C0511] text-[#5C0511] text-xs tracking-widest uppercase px-5 py-3 hover:bg-[#F5E6D8] transition-colors"
                     >
                       <Headphones size={14} /> Listen
                     </a>
@@ -156,11 +156,11 @@ export default function PodcastPage() {
       )}
 
       {/* All Episodes */}
-      <section className="bg-[#F8F6E7] py-16 px-6 pb-24">
+      <section className="bg-[#FAF7EE] py-16 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
           <SectionReveal>
             <h2
-              className="text-3xl text-[#2C2C2C] mb-10"
+              className="text-3xl text-[#1C1410] mb-10"
               style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
             >
               All Episodes
@@ -170,7 +170,7 @@ export default function PodcastPage() {
           <div className="flex flex-col gap-4">
             {rest.map((episode, i) => (
               <SectionReveal key={episode.id} delay={i * 60}>
-                <div className="group grid grid-cols-1 md:grid-cols-[120px_1fr] gap-6 bg-white/60 hover:bg-[#FFE9DF] transition-colors duration-300 p-6">
+                <div className="group grid grid-cols-1 md:grid-cols-[120px_1fr] gap-6 bg-white/60 hover:bg-[#F5E6D8] transition-colors duration-300 p-6">
                   <div className="relative w-28 md:w-auto aspect-square overflow-hidden flex-shrink-0">
                     <Image
                       src={episode.image}
@@ -179,44 +179,44 @@ export default function PodcastPage() {
                       className="object-cover"
                       sizes="120px"
                     />
-                    <div className="absolute inset-0 bg-[#2C2C2C]/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                    <div className="absolute inset-0 bg-[#1C1410]/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                       <Play size={20} className="text-white" />
                     </div>
                   </div>
                   <div className="flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="text-xs tracking-widest uppercase text-[#70090F]">
+                        <span className="text-xs tracking-widest uppercase text-[#5C0511]">
                           Ep. {episode.episode}
                         </span>
-                        <span className="text-xs text-[#4A4A4A]">
+                        <span className="text-xs text-[#6B5E54]">
                           {episode.date}
                         </span>
-                        <span className="text-xs text-[#4A4A4A]">·</span>
-                        <span className="text-xs text-[#4A4A4A]">
+                        <span className="text-xs text-[#6B5E54]">·</span>
+                        <span className="text-xs text-[#6B5E54]">
                           {episode.duration}
                         </span>
                       </div>
                       <h3
-                        className="text-xl text-[#2C2C2C] mb-2 leading-snug"
+                        className="text-xl text-[#1C1410] mb-2 leading-snug"
                         style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                       >
                         {episode.title}
                       </h3>
-                      <p className="text-sm text-[#4A4A4A] leading-relaxed">
+                      <p className="text-sm text-[#6B5E54] leading-relaxed">
                         {episode.description}
                       </p>
                     </div>
                     <div className="flex gap-3 mt-4">
                       <a
                         href={episode.youtubeUrl}
-                        className="inline-flex items-center gap-1.5 bg-[#70090F] text-white text-xs tracking-widest uppercase px-4 py-2 hover:bg-[#560008] transition-colors"
+                        className="inline-flex items-center gap-1.5 bg-[#5C0511] text-white text-xs tracking-widest uppercase px-4 py-2 hover:bg-[#8B1A24] transition-colors"
                       >
                         <YoutubeIcon size={12} /> YouTube
                       </a>
                       <a
                         href={episode.spotifyUrl}
-                        className="inline-flex items-center gap-1.5 border border-[#70090F]/40 text-[#70090F] text-xs tracking-widest uppercase px-4 py-2 hover:border-[#70090F] transition-colors"
+                        className="inline-flex items-center gap-1.5 border border-[#5C0511]/40 text-[#5C0511] text-xs tracking-widest uppercase px-4 py-2 hover:border-[#5C0511] transition-colors"
                       >
                         <Headphones size={12} /> Listen
                       </a>

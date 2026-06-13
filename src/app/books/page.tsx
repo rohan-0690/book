@@ -21,7 +21,7 @@ export default function BooksPage() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-[#1e1010] pt-40 pb-28 px-6 relative overflow-hidden">
+      <section className="bg-[#1C1410] pt-40 pb-28 px-6 relative overflow-hidden">
         <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.08 }}
@@ -36,7 +36,7 @@ export default function BooksPage() {
             sizes="100vw"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#70090F]/15 via-[#1e1010]/65 to-[#1e1010]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#5C0511]/15 via-[#1C1410]/65 to-[#1C1410]" />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
@@ -45,11 +45,11 @@ export default function BooksPage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <span className="h-px w-8 bg-[#FFE9DF]/30" />
-            <span className="text-xs tracking-widest uppercase text-[#FFE9DF]/60">
+            <span className="h-px w-8 bg-[#F5E6D8]/30" />
+            <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60">
               Reading List
             </span>
-            <span className="h-px w-8 bg-[#FFE9DF]/30" />
+            <span className="h-px w-8 bg-[#F5E6D8]/30" />
           </motion.div>
 
           <motion.h1
@@ -61,7 +61,7 @@ export default function BooksPage() {
           >
             The Become.ing
             <br />
-            <span className="italic text-[#FFE9DF]">Bookshelf</span>
+            <span className="italic text-[#F5E6D8]">Bookshelf</span>
           </motion.h1>
 
           <motion.p
@@ -76,7 +76,7 @@ export default function BooksPage() {
       </section>
 
       {/* ── FILTER BAR ───────────────────────────────────── */}
-      <section className="bg-[#F8F6E7] py-8 px-6 border-b border-[#70090F]/10 sticky top-20 z-30">
+      <section className="bg-[#FAF7EE] py-8 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
           {categories.map((cat) => (
             <motion.button
@@ -84,8 +84,8 @@ export default function BooksPage() {
               onClick={() => setActiveCategory(cat)}
               className={`text-xs tracking-widest uppercase px-4 py-2 transition-colors duration-200 ${
                 activeCategory === cat
-                  ? "bg-[#70090F] text-white"
-                  : "bg-white text-[#2C2C2C] border border-[#70090F]/20 hover:border-[#70090F] hover:text-[#70090F]"
+                  ? "bg-[#5C0511] text-white"
+                  : "bg-white text-[#1C1410] border border-[#5C0511]/20 hover:border-[#5C0511] hover:text-[#5C0511]"
               }`}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
@@ -97,7 +97,7 @@ export default function BooksPage() {
       </section>
 
       {/* ── BOOKS GRID ───────────────────────────────────── */}
-      <section className="bg-[#F8F6E7] py-16 px-6 pb-24">
+      <section className="bg-[#FAF7EE] py-16 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
           {/*
             IMPORTANT: No `layout` prop on the grid wrapper, no `popLayout`.
@@ -151,7 +151,7 @@ export default function BooksPage() {
                     <AnimatePresence>
                       {hoveredBook === book.id && (
                         <motion.div
-                          className="absolute inset-0 bg-[#70090F]/85 flex items-center justify-center"
+                          className="absolute inset-0 bg-[#5C0511]/85 flex items-center justify-center"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function BooksPage() {
                         >
                           <motion.a
                             href={book.amazonUrl}
-                            className="flex items-center gap-2 bg-white text-[#70090F] text-xs tracking-widest uppercase px-4 py-2.5"
+                            className="flex items-center gap-2 bg-white text-[#5C0511] text-xs tracking-widest uppercase px-4 py-2.5"
                             initial={{ y: 8, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.06 }}
@@ -173,23 +173,23 @@ export default function BooksPage() {
                   </motion.div>
 
                   {/* Text */}
-                  <span className="text-xs tracking-widest uppercase text-[#70090F] mb-1">
+                  <span className="text-xs tracking-widest uppercase text-[#5C0511] mb-1">
                     {book.category}
                   </span>
                   <h3
-                    className="text-base text-[#2C2C2C] leading-snug mb-1 group-hover:text-[#70090F] transition-colors duration-200"
+                    className="text-base text-[#1C1410] leading-snug mb-1 group-hover:text-[#5C0511] transition-colors duration-200"
                     style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
                   >
                     {book.title}
                   </h3>
-                  <p className="text-xs text-[#4A4A4A] mb-3">{book.author}</p>
-                  <p className="text-xs text-[#4A4A4A] leading-relaxed mb-4 flex-1 line-clamp-3">
+                  <p className="text-xs text-[#6B5E54] mb-3">{book.author}</p>
+                  <p className="text-xs text-[#6B5E54] leading-relaxed mb-4 flex-1 line-clamp-3">
                     {book.description}
                   </p>
 
                   <motion.a
                     href={book.amazonUrl}
-                    className="inline-flex items-center gap-1.5 text-xs tracking-widest uppercase text-[#70090F] border-b border-[#70090F]/40 pb-0.5 hover:border-[#70090F] transition-colors w-fit"
+                    className="inline-flex items-center gap-1.5 text-xs tracking-widest uppercase text-[#5C0511] border-b border-[#5C0511]/40 pb-0.5 hover:border-[#5C0511] transition-colors w-fit"
                     whileHover={{ x: 3 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -203,12 +203,12 @@ export default function BooksPage() {
       </section>
 
       {/* ── CTA BANNER ───────────────────────────────────── */}
-      <section className="bg-[#70090F] py-20 px-6 relative overflow-hidden">
+      <section className="bg-[#5C0511] py-20 px-6 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-5"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 30% 50%, #FFE9DF, transparent 60%)",
+              "radial-gradient(circle at 30% 50%, #F5E6D8, transparent 60%)",
           }}
         />
         <SectionReveal direction="none">
@@ -225,7 +225,7 @@ export default function BooksPage() {
             </p>
             <motion.a
               href="mailto:books@become.ing"
-              className="inline-block border border-white text-white text-sm tracking-widest uppercase px-8 py-3 hover:bg-white hover:text-[#70090F] transition-colors"
+              className="inline-block border border-white text-white text-sm tracking-widest uppercase px-8 py-3 hover:bg-white hover:text-[#5C0511] transition-colors"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
             >

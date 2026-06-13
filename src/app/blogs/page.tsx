@@ -34,7 +34,7 @@ export default function BlogsPage() {
   return (
     <>
       {/* Header */}
-      <section className="bg-[#2C2C2C] pt-40 pb-24 px-6 relative overflow-hidden">
+      <section className="bg-[#1C1410] pt-40 pb-24 px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <Image
             src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70"
@@ -45,7 +45,7 @@ export default function BlogsPage() {
           />
         </div>
         <div className="relative max-w-4xl mx-auto text-center">
-          <span className="text-xs tracking-widest uppercase text-[#FFE9DF]/60 block mb-4">
+          <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60 block mb-4">
             The Journal
           </span>
           <h1
@@ -62,13 +62,13 @@ export default function BlogsPage() {
       </section>
 
       {/* Search + Filter */}
-      <section className="bg-[#F8F6E7] py-10 px-6 border-b border-[#70090F]/10 sticky top-20 z-30">
+      <section className="bg-[#FAF7EE] py-10 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between">
           {/* Search */}
           <div className="relative w-full md:w-80">
             <Search
               size={16}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#70090F]/50"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-[#5C0511]/50"
             />
             <input
               type="text"
@@ -78,7 +78,7 @@ export default function BlogsPage() {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full bg-white border border-[#70090F]/20 text-[#2C2C2C] text-sm pl-10 pr-4 py-3 focus:outline-none focus:border-[#70090F] placeholder:text-[#4A4A4A]/50"
+              className="w-full bg-white border border-[#5C0511]/20 text-[#1C1410] text-sm pl-10 pr-4 py-3 focus:outline-none focus:border-[#5C0511] placeholder:text-[#6B5E54]/50"
             />
           </div>
           {/* Categories */}
@@ -92,8 +92,8 @@ export default function BlogsPage() {
                 }}
                 className={`text-xs tracking-widest uppercase px-4 py-2 transition-colors ${
                   activeCategory === cat
-                    ? "bg-[#70090F] text-white"
-                    : "bg-white text-[#2C2C2C] border border-[#70090F]/20 hover:border-[#70090F] hover:text-[#70090F]"
+                    ? "bg-[#5C0511] text-white"
+                    : "bg-white text-[#1C1410] border border-[#5C0511]/20 hover:border-[#5C0511] hover:text-[#5C0511]"
                 }`}
               >
                 {cat}
@@ -105,7 +105,7 @@ export default function BlogsPage() {
 
       {/* Featured Post */}
       {featuredPost && activeCategory === "All" && !searchQuery && (
-        <section className="bg-[#F8F6E7] py-12 px-6">
+        <section className="bg-[#FAF7EE] py-12 px-6">
           <div className="max-w-7xl mx-auto">
             <SectionReveal>
               <BlogCard post={featuredPost} featured />
@@ -115,7 +115,7 @@ export default function BlogsPage() {
       )}
 
       {/* Posts Grid */}
-      <section className="bg-[#F8F6E7] py-12 px-6 pb-24">
+      <section className="bg-[#FAF7EE] py-12 px-6 pb-24">
         <div className="max-w-7xl mx-auto">
           {paginated.length > 0 ? (
             <>
@@ -137,8 +137,8 @@ export default function BlogsPage() {
                         onClick={() => setCurrentPage(page)}
                         className={`w-10 h-10 text-sm transition-colors ${
                           currentPage === page
-                            ? "bg-[#70090F] text-white"
-                            : "border border-[#70090F]/30 text-[#2C2C2C] hover:border-[#70090F] hover:text-[#70090F]"
+                            ? "bg-[#5C0511] text-white"
+                            : "border border-[#5C0511]/30 text-[#1C1410] hover:border-[#5C0511] hover:text-[#5C0511]"
                         }`}
                       >
                         {page}
@@ -150,7 +150,7 @@ export default function BlogsPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-[#4A4A4A] text-lg">
+              <p className="text-[#6B5E54] text-lg">
                 No articles found. Try a different search or category.
               </p>
             </div>
