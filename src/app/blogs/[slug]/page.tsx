@@ -32,7 +32,7 @@ export default async function BlogPost({ params }: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="relative h-[60vh] flex items-end overflow-hidden">
+      <section className="relative h-[50vh] min-h-[300px] flex items-end overflow-hidden">
         <Image
           src={post.image}
           alt={post.title}
@@ -132,16 +132,16 @@ export default async function BlogPost({ params }: Props) {
           >
             Continue Reading
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {related.map((p) => (
               <Link key={p.id} href={`/blogs/${p.slug}`} className="group flex flex-col">
-                <div className="relative aspect-[4/3] overflow-hidden mb-4">
+                <div className="relative w-full overflow-hidden mb-4" style={{ paddingBottom: "75%" }}>
                   <Image
                     src={p.image}
                     alt={p.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, 33vw"
                   />
                   <div className="absolute top-3 left-3 bg-[#5C0511] text-white text-xs tracking-widest uppercase px-2 py-0.5">
                     {p.category}

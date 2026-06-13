@@ -276,8 +276,8 @@ export default function ArtPage() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`img-${selected.id}`}
-                  className="relative min-h-[300px]"
-                  style={{ aspectRatio: "1 / 1" }}
+                  className="relative w-full overflow-hidden"
+                  style={{ paddingBottom: "100%" }}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 12 }}

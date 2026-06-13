@@ -105,11 +105,12 @@ export default function AboutPage() {
 
             <SectionReveal direction="left" delay={150} className="order-1 lg:order-2">
               <div className="relative">
-                <motion.div
-                  className="relative aspect-[3/4] overflow-hidden"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
+                <div className="relative w-full overflow-hidden" style={{ paddingBottom: "133.33%" }}>
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  >
                   <Image
                     src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=800&q=80"
                     alt="Karishma Chhatrapati"
@@ -117,7 +118,8 @@ export default function AboutPage() {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                </motion.div>
+                  </motion.div>
+                </div>
                 <motion.div
                   className="absolute -bottom-6 -right-6 w-40 h-40 bg-[#F5E6D8] -z-10"
                   initial={{ scale: 0.7, opacity: 0 }}
@@ -144,11 +146,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <SectionReveal direction="right">
               <div className="relative">
-                <motion.div
-                  className="relative aspect-[3/4] overflow-hidden"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
+                <div className="relative w-full overflow-hidden" style={{ paddingBottom: "133.33%" }}>
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  >
                   <Image
                     src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80"
                     alt="Ila — Creative Director"
@@ -156,7 +159,8 @@ export default function AboutPage() {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                </motion.div>
+                  </motion.div>
+                </div>
                 <motion.div
                   className="absolute -bottom-6 -left-6 w-40 h-40 bg-[#FAF7EE] -z-10"
                   initial={{ scale: 0.7, opacity: 0 }}

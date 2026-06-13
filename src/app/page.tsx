@@ -138,11 +138,13 @@ export default function Home() {
 
             <SectionReveal direction="left" delay={150}>
               <div className="relative mt-8 lg:mt-0">
-                <motion.div className="relative overflow-hidden" style={{ aspectRatio: "4/5" }}
-                  whileHover={{ scale: 1.02 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
-                  <Image src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
-                    alt="Become.ing community" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
-                </motion.div>
+                <div className="relative w-full overflow-hidden" style={{ paddingBottom: "125%" }}>
+                  <motion.div className="absolute inset-0"
+                    whileHover={{ scale: 1.02 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
+                    <Image src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80"
+                      alt="Become.ing community" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+                  </motion.div>
+                </div>
                 <motion.div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 w-28 sm:w-36 h-28 sm:h-36 -z-10"
                   style={{ background: "#F5E6D8" }}
                   initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} />
@@ -271,7 +273,7 @@ export default function Home() {
             <motion.div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden shadow-xl"
               style={{ background: "#FAF7EE" }}
               whileHover={{ boxShadow: "0 24px 64px rgba(92,5,17,0.14)" }}>
-              <div className="relative overflow-hidden" style={{ aspectRatio: "1/1" }}>
+              <div className="relative w-full overflow-hidden" style={{ paddingBottom: "100%" /* 1:1 */ }}>
                 <Image src={latestEpisode.image} alt={latestEpisode.title} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
                 <div className="absolute inset-0 flex items-center justify-center" style={{ background: "rgba(28,20,16,0.38)" }}>
                   <motion.div className="relative w-16 sm:w-20 h-16 sm:h-20 rounded-full flex items-center justify-center cursor-pointer shadow-2xl"
@@ -382,9 +384,10 @@ export default function Home() {
             {featuredArt.map((artwork, i) => (
               <SectionReveal key={artwork.id} delay={i * 70}>
                 <motion.div className="group relative overflow-hidden cursor-pointer"
-                  style={{ aspectRatio: i % 2 === 0 ? "3/4" : "1/1" }}
+                  style={{ paddingBottom: i % 2 === 0 ? "133.33%" : "100%", position: "relative" }}
                   onHoverStart={() => setHoveredArt(artwork.id)} onHoverEnd={() => setHoveredArt(null)}
                   whileHover={{ scale: 1.02 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
+                  <div className="absolute inset-0">
                   <Image src={artwork.image} alt={artwork.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 50vw, 25vw" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{ border: "1px solid rgba(201,169,110,0.5)" }} />
@@ -404,6 +407,7 @@ export default function Home() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                  </div>
                 </motion.div>
               </SectionReveal>
             ))}

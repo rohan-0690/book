@@ -104,7 +104,7 @@ export default function PodcastPage() {
                 Latest Episode
               </span>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 bg-white shadow-sm overflow-hidden">
-                <div className="relative aspect-square lg:aspect-auto">
+                <div className="relative w-full overflow-hidden" style={{ paddingBottom: "100%" }}>
                   <Image
                     src={featured.image}
                     alt={featured.title}
@@ -171,16 +171,18 @@ export default function PodcastPage() {
             {rest.map((episode, i) => (
               <SectionReveal key={episode.id} delay={i * 60}>
                 <div className="group grid grid-cols-1 md:grid-cols-[120px_1fr] gap-6 bg-white/60 hover:bg-[#F5E6D8] transition-colors duration-300 p-6">
-                  <div className="relative w-28 md:w-auto aspect-square overflow-hidden flex-shrink-0">
+                  <div className="relative w-24 sm:w-28 flex-shrink-0 overflow-hidden" style={{ paddingBottom: "0", height: "96px" }}>
+                    <div className="relative w-full h-full">
                     <Image
                       src={episode.image}
                       alt={episode.title}
                       fill
                       className="object-cover"
-                      sizes="120px"
+                      sizes="112px"
                     />
                     <div className="absolute inset-0 bg-[#1C1410]/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                       <Play size={20} className="text-white" />
+                    </div>
                     </div>
                   </div>
                   <div className="flex flex-col justify-between">
