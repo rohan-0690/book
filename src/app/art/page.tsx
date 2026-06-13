@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import SectionReveal from "@/components/SectionReveal";
 import { artworks } from "@/lib/data";
 import { X, MessageCircle, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 const artists = ["All", ...Array.from(new Set(artworks.map((a) => a.artist)))];
+
+// Fixed height ratios per position so masonry has variety
+const heightMap = [133, 100, 120, 110, 133, 100, 120, 133, 100];
 
 export default function ArtPage() {
   const [activeArtist, setActiveArtist] = useState("All");
@@ -19,16 +21,9 @@ export default function ArtPage() {
       ? artworks
       : artworks.filter((a) => a.artist === activeArtist);
 
-  const currentIndex = selected
-    ? filtered.findIndex((a) => a.id === selected.id)
-    : -1;
-
-  const goPrev = () => {
-    if (currentIndex > 0) setSelected(filtered[currentIndex - 1]);
-  };
-  const goNext = () => {
-    if (currentIndex < filtered.length - 1) setSelected(filtered[currentIndex + 1]);
-  };
+  const currentIndex = selected ? filtered.findIndex((a) => a.id === selected.id) : -1;
+  const goPrev = () => currentIndex > 0 && setSelected(filtered[currentIndex - 1]);
+  const goNext = () => currentIndex < filtered.length - 1 && setSelected(filtered[currentIndex + 1]);
 
   const whatsappUrl = selected
     ? `https://wa.me/?text=${encodeURIComponent(
@@ -38,8 +33,11 @@ export default function ArtPage() {
 
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────── */}
-      <section className="bg-[#1C1410] pt-40 pb-28 px-6 relative overflow-hidden">
+      {/* ── HERO ──────────────────────────────────────────── */}
+      <section
+        className="pt-36 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6 relative overflow-hidden"
+        style={{ background: "#1C1410" }}
+      >
         <motion.div
           className="absolute inset-0"
           initial={{ scale: 1.08 }}
@@ -54,39 +52,51 @@ export default function ArtPage() {
             sizes="100vw"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#5C0511]/15 via-[#1C1410]/65 to-[#1C1410]" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg,rgba(92,5,17,0.15) 0%,rgba(28,20,16,0.65) 50%,#1C1410 100%)",
+          }}
+        />
 
         <div className="relative max-w-4xl mx-auto text-center">
           <motion.div
-            className="flex items-center justify-center gap-3 mb-6"
+            className="flex items-center justify-center gap-3 mb-5 sm:mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            transition={{ delay: 0.3 }}
           >
-            <span className="h-px w-8 bg-[#F5E6D8]/30" />
-            <span className="text-xs tracking-widest uppercase text-[#F5E6D8]/60">
+            <span className="h-px w-8" style={{ background: "rgba(245,230,216,0.3)" }} />
+            <span
+              className="text-[10px] sm:text-xs tracking-widest uppercase"
+              style={{ color: "rgba(245,230,216,0.6)" }}
+            >
               Art Collective
             </span>
-            <span className="h-px w-8 bg-[#F5E6D8]/30" />
+            <span className="h-px w-8" style={{ background: "rgba(245,230,216,0.3)" }} />
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-7xl text-white leading-tight mb-6"
-            style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
-            initial={{ opacity: 0, y: 32 }}
+            className="text-4xl sm:text-5xl md:text-7xl text-white leading-tight mb-5 sm:mb-6"
+            style={{ fontFamily: "'TheSeasons','Georgia',serif" }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
             Become.ing
             <br />
-            <span className="italic text-[#F5E6D8]">Art Collective</span>
+            <span className="italic" style={{ color: "#E8D5B0" }}>
+              Art Collective
+            </span>
           </motion.h1>
 
           <motion.p
-            className="text-white/55 text-lg max-w-xl mx-auto"
+            className="text-sm sm:text-lg max-w-xl mx-auto"
+            style={{ color: "rgba(250,247,238,0.5)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.75, duration: 0.7 }}
+            transition={{ delay: 0.7 }}
           >
             Original works by women artists exploring identity, transformation,
             and the art of becoming.
@@ -94,18 +104,29 @@ export default function ArtPage() {
         </div>
       </section>
 
-      {/* ── FILTER BAR ───────────────────────────────────── */}
-      <section className="bg-[#FAF7EE] py-8 px-6 border-b border-[#5C0511]/10 sticky top-20 z-30">
+      {/* ── FILTER BAR ────────────────────────────────────── */}
+      <section
+        className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
+        style={{
+          background: "#FAF7EE",
+          borderBottom: "1px solid rgba(92,5,17,0.1)",
+        }}
+      >
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
           {artists.map((artist) => (
             <motion.button
               key={artist}
               onClick={() => setActiveArtist(artist)}
-              className={`text-xs tracking-widest uppercase px-4 py-2 transition-colors duration-200 ${
+              className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
+              style={
                 activeArtist === artist
-                  ? "bg-[#5C0511] text-white"
-                  : "bg-white text-[#1C1410] border border-[#5C0511]/20 hover:border-[#5C0511] hover:text-[#5C0511]"
-              }`}
+                  ? { background: "#5C0511", color: "#fff" }
+                  : {
+                      background: "#fff",
+                      color: "#1C1410",
+                      border: "1px solid rgba(92,5,17,0.2)",
+                    }
+              }
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
             >
@@ -115,14 +136,9 @@ export default function ArtPage() {
         </div>
       </section>
 
-      {/* ── MASONRY GALLERY ──────────────────────────────── */}
-      <section className="bg-[#FAF7EE] py-16 px-6 pb-24">
+      {/* ── MASONRY GALLERY ───────────────────────────────── */}
+      <section className="py-10 sm:py-16 px-3 sm:px-6 pb-20 sm:pb-28" style={{ background: "#FAF7EE" }}>
         <div className="max-w-7xl mx-auto">
-          {/* 
-            NOTE: We deliberately avoid Framer Motion `layout` on a CSS-columns
-            container — it breaks the masonry layout. Plain CSS columns + 
-            per-item entrance animations is the right approach here.
-          */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeArtist}
@@ -132,156 +148,180 @@ export default function ArtPage() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {filtered.map((artwork, i) => (
-                <motion.div
-                  key={artwork.id}
-                  className="masonry-item"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.55,
-                    delay: (i % 9) * 0.07,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
-                  {/* Card */}
-                  <div
-                    className="group relative overflow-hidden cursor-pointer"
-                    onClick={() => setSelected(artwork)}
-                    onMouseEnter={() => setHoveredId(artwork.id)}
-                    onMouseLeave={() => setHoveredId(null)}
+              {filtered.map((artwork, i) => {
+                const pb = heightMap[i % heightMap.length];
+                return (
+                  <motion.div
+                    key={artwork.id}
+                    className="masonry-item"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: (i % 6) * 0.07,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   >
-                    <motion.div
-                      animate={{ scale: hoveredId === artwork.id ? 1.04 : 1 }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    {/*
+                      KEY FIX: paddingBottom establishes real height.
+                      Image sits absolute inside. No motion wrapper around Image.
+                      CSS handles the hover zoom via group-hover:scale-105.
+                    */}
+                    <div
+                      className="relative w-full overflow-hidden cursor-pointer group"
+                      style={{ paddingBottom: `${pb}%` }}
+                      onClick={() => setSelected(artwork)}
+                      onMouseEnter={() => setHoveredId(artwork.id)}
+                      onMouseLeave={() => setHoveredId(null)}
                     >
+                      {/* Image — CSS zoom only, no motion wrapper */}
                       <Image
                         src={artwork.image}
                         alt={artwork.title}
-                        width={600}
-                        height={i % 3 === 0 ? 750 : i % 3 === 1 ? 500 : 620}
-                        className="w-full object-cover block"
+                        fill
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
-                    </motion.div>
 
-                    {/* Hover overlay — plain AnimatePresence, no nested whileHover */}
-                    <AnimatePresence>
-                      {hoveredId === artwork.id && (
-                        <motion.div
-                          className="absolute inset-0 bg-[#5C0511]/80 flex flex-col items-center justify-center gap-3 p-6"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.25 }}
-                        >
+                      {/* Gold border on hover */}
+                      <div
+                        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ border: "1px solid rgba(201,169,110,0.55)" }}
+                      />
+
+                      {/* Hover overlay */}
+                      <AnimatePresence>
+                        {hoveredId === artwork.id && (
                           <motion.div
-                            initial={{ y: 10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.05 }}
+                            className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4"
+                            style={{
+                              background:
+                                "linear-gradient(180deg,rgba(92,5,17,0.75) 0%,rgba(28,20,16,0.9) 100%)",
+                            }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.22 }}
                           >
-                            <ZoomIn size={28} className="text-white mb-2" />
+                            <motion.div
+                              initial={{ y: 8, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.04 }}
+                            >
+                              <ZoomIn size={24} className="text-white mb-1" />
+                            </motion.div>
+                            <motion.p
+                              className="text-white text-center text-base sm:text-lg leading-tight"
+                              style={{ fontFamily: "'TheSeasons','Georgia',serif" }}
+                              initial={{ y: 8, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.09 }}
+                            >
+                              {artwork.title}
+                            </motion.p>
+                            <motion.p
+                              className="text-center text-xs sm:text-sm"
+                              style={{ color: "rgba(201,169,110,0.85)" }}
+                              initial={{ y: 8, opacity: 0 }}
+                              animate={{ y: 0, opacity: 1 }}
+                              transition={{ delay: 0.13 }}
+                            >
+                              {artwork.artist} · {artwork.medium}
+                            </motion.p>
                           </motion.div>
-                          <motion.p
-                            className="text-white text-center text-xl leading-tight"
-                            style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
-                            initial={{ y: 10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.1 }}
-                          >
-                            {artwork.title}
-                          </motion.p>
-                          <motion.p
-                            className="text-white/75 text-sm text-center"
-                            initial={{ y: 10, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.14 }}
-                          >
-                            {artwork.artist} · {artwork.medium}
-                          </motion.p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </motion.div>
-              ))}
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
-      {/* ── LIGHTBOX ─────────────────────────────────────── */}
+      {/* ── LIGHTBOX ──────────────────────────────────────── */}
       <AnimatePresence>
         {selected && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.28 }}
             onClick={() => setSelected(null)}
           >
-            {/* Backdrop blur */}
-            <div className="absolute inset-0 bg-[#1C1410]/92 backdrop-blur-sm" />
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0"
+              style={{ background: "rgba(28,20,16,0.93)", backdropFilter: "blur(6px)" }}
+            />
 
             {/* Panel */}
             <motion.div
-              className="relative max-w-5xl w-full grid grid-cols-1 md:grid-cols-[1fr_340px] bg-[#FAF7EE] overflow-hidden shadow-2xl"
-              style={{ maxHeight: "90vh" }}
-              initial={{ scale: 0.93, y: 24, opacity: 0 }}
+              className="relative w-full max-w-4xl flex flex-col md:flex-row overflow-hidden shadow-2xl"
+              style={{ background: "#FAF7EE", maxHeight: "92dvh" }}
+              initial={{ scale: 0.93, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.93, y: 24, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ scale: 0.93, y: 20, opacity: 0 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
+              {/* Close */}
               <motion.button
                 onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 z-20 w-9 h-9 bg-[#1C1410] text-white flex items-center justify-center hover:bg-[#5C0511] transition-colors"
+                className="absolute top-3 right-3 z-20 w-9 h-9 flex items-center justify-center text-white transition-colors"
+                style={{ background: "#1C1410" }}
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.2 }}
                 aria-label="Close"
               >
-                <X size={16} />
+                <X size={15} />
               </motion.button>
 
-              {/* Prev button */}
+              {/* Prev */}
               {currentIndex > 0 && (
                 <motion.button
                   onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white flex items-center justify-center hover:bg-[#5C0511] transition-colors"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-9 h-9 flex items-center justify-center text-white transition-colors"
+                  style={{ background: "rgba(0,0,0,0.45)" }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  aria-label="Previous artwork"
+                  aria-label="Previous"
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={18} />
                 </motion.button>
               )}
 
-              {/* Next button */}
+              {/* Next */}
               {currentIndex < filtered.length - 1 && (
                 <motion.button
                   onClick={(e) => { e.stopPropagation(); goNext(); }}
-                  className="absolute right-[356px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/50 text-white items-center justify-center hover:bg-[#5C0511] transition-colors hidden md:flex"
+                  className="absolute z-20 w-9 h-9 items-center justify-center text-white transition-colors hidden md:flex"
+                  style={{
+                    background: "rgba(0,0,0,0.45)",
+                    right: "calc(320px + 8px)",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  aria-label="Next artwork"
+                  aria-label="Next"
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={18} />
                 </motion.button>
               )}
 
-              {/* Artwork image */}
+              {/* Image — paddingBottom for reliable height */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`img-${selected.id}`}
-                  className="relative w-full overflow-hidden"
-                  style={{ paddingBottom: "100%" }}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 12 }}
-                  transition={{ duration: 0.35 }}
+                  className="relative w-full md:flex-1 overflow-hidden flex-shrink-0"
+                  style={{ paddingBottom: "75%" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <Image
                     src={selected.image}
@@ -293,29 +333,37 @@ export default function ArtPage() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Info panel */}
+              {/* Info */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`info-${selected.id}`}
-                  className="flex flex-col justify-between p-8 overflow-y-auto"
-                  initial={{ opacity: 0, x: 12 }}
+                  className="flex flex-col justify-between p-6 sm:p-8 overflow-y-auto flex-shrink-0"
+                  style={{ width: "100%", maxWidth: "320px" }}
+                  initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.35, delay: 0.05 }}
+                  transition={{ duration: 0.3, delay: 0.05 }}
                 >
                   <div>
-                    <span className="text-xs tracking-widest uppercase text-[#5C0511] block mb-3">
+                    <span
+                      className="text-[10px] sm:text-xs tracking-widest uppercase block mb-3"
+                      style={{ color: "#C9A96E" }}
+                    >
                       {selected.medium}
                     </span>
                     <h2
-                      className="text-3xl text-[#1C1410] mb-2 leading-tight"
-                      style={{ fontFamily: "'TheSeasons', 'Georgia', serif" }}
+                      className="text-2xl sm:text-3xl mb-2 leading-tight"
+                      style={{ fontFamily: "'TheSeasons','Georgia',serif", color: "#1C1410" }}
                     >
                       {selected.title}
                     </h2>
-                    <p className="text-sm text-[#5C0511] mb-1">{selected.artist}</p>
-                    <p className="text-xs text-[#6B5E54] mb-6">{selected.width}</p>
-                    <p className="text-sm text-[#6B5E54] leading-relaxed">
+                    <p className="text-sm mb-1" style={{ color: "#5C0511" }}>
+                      {selected.artist}
+                    </p>
+                    <p className="text-xs mb-5" style={{ color: "#6B5E54" }}>
+                      {selected.width}
+                    </p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#6B5E54" }}>
                       {selected.description}
                     </p>
                   </div>
@@ -324,11 +372,12 @@ export default function ArtPage() {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-8 flex items-center justify-center gap-2 bg-[#5C0511] text-white text-sm tracking-widest uppercase px-6 py-4 hover:bg-[#8B1A24] transition-colors"
+                    className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-white text-xs sm:text-sm tracking-widest uppercase px-4 sm:px-6 py-3.5 sm:py-4 transition-colors"
+                    style={{ background: "linear-gradient(135deg,#5C0511,#8B1A24)" }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.97 }}
                   >
-                    <MessageCircle size={16} /> Enquire on WhatsApp
+                    <MessageCircle size={15} /> Enquire on WhatsApp
                   </motion.a>
                 </motion.div>
               </AnimatePresence>
