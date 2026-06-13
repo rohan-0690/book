@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ─── Variables ─────────────────────────────────────── */
+:root {
+  --burgundy: #70090F;
+  --burgundy-dark: #560008;
+  --blush: #FFE9DF;
+  --ivory: #F8F6E7;
+  --charcoal: #2C2C2C;
+  --charcoal-light: #4A4A4A;
+}
+
+/* ─── Base ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F8F6E7;
+  color: #2C2C2C;
+  font-family: 'Visby', 'system-ui', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'TheSeasons', 'Georgia', 'Times New Roman', serif;
+  font-weight: 400;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: #F8F6E7; }
+::-webkit-scrollbar-thumb  { background: #70090F; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #560008; }
+
+/* ─── Selection ──────────────────────────────────────── */
+::selection {
+  background: #FFE9DF;
+  color: #70090F;
+}
+
+/* ─── Smooth image transitions ───────────────────────── */
+img {
+  transition: opacity 0.4s ease;
+}
+
+/* ─── Masonry Layout ─────────────────────────────────── */
+.masonry-grid {
+  columns: 3;
+  column-gap: 1.5rem;
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 1024px) { .masonry-grid { columns: 2; } }
+@media (max-width: 640px)  { .masonry-grid { columns: 1; } }
+
+/* ─── Prose ──────────────────────────────────────────── */
+.prose p            { margin-bottom: 1.5rem; line-height: 1.85; }
+.prose blockquote   { margin: 2.5rem 0; }
+
+/* ─── Button wipe animation ──────────────────────────── */
+.btn-wipe {
+  position: relative;
+  overflow: hidden;
+}
+.btn-wipe::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #560008;
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-wipe:hover::after {
+  transform: translateX(0);
+}
+.btn-wipe > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Page transition fade ───────────────────────────── */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main > * {
+  animation: pageFadeIn 0.5s ease both;
+}
+
+/* ─── Floating animation for decorative elements ─────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ─── Shimmer loading skeleton ───────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #ece9da 25%, #f8f6e7 50%, #ece9da 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
