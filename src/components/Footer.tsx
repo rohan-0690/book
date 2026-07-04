@@ -7,36 +7,33 @@ const Yt = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none" str
 const Li = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>;
 
 const links = [
-  { href:"/",label:"Home" },{ href:"/about",label:"About Us" },{ href:"/blogs",label:"Blogs" },
-  { href:"/podcast",label:"Podcast & YouTube" },{ href:"/books",label:"Books" },
-  { href:"/art",label:"Art Collective" },{ href:"/newsletter",label:"Newsletter" },
+  { href: "/", label: "Home" }, { href: "/about", label: "About Us" },
+  { href: "/blogs", label: "Blogs" }, { href: "/podcast", label: "Podcast & YouTube" },
+  { href: "/books", label: "Books" }, { href: "/art", label: "Art Collective" },
+  { href: "/newsletter", label: "Newsletter" },
 ];
 
 export default function Footer() {
-  const dim = "rgba(245,239,230,.42)";
-  const hover = (e: React.MouseEvent<HTMLElement>, c: string) => (e.currentTarget.style.color = c);
-  const blur  = (e: React.MouseEvent<HTMLElement>) => (e.currentTarget.style.color = dim);
-
   return (
-    <footer style={{ background: "#1A0A0A", color: "#F5EFE6" }}>
-      <div className="h-px" style={{ background: "linear-gradient(90deg,transparent,#D4A853 30%,#D4A853 70%,transparent)" }} />
+    <footer style={{ background: "#2C2C2C", color: "#F8F6E7" }}>
+      <div className="h-px" style={{ background: "linear-gradient(90deg,transparent,#70090F 30%,#70090F 70%,transparent)" }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
 
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-2xl sm:text-3xl mb-3" style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#EDD9A3" }}>Become.ing</h3>
-            <div className="w-10 h-px mb-5" style={{ background:"linear-gradient(90deg,#D4A853,transparent)" }} />
-            <p className="text-sm leading-relaxed mb-6 max-w-xs" style={{ color: dim }}>
+            <h3 className="text-2xl sm:text-3xl mb-3" style={{ fontFamily: "'TheSeasons',Georgia,serif", color: "#FFE9DF" }}>Become.ing</h3>
+            <div className="w-10 h-px mb-5" style={{ background: "linear-gradient(90deg,#70090F,transparent)" }} />
+            <p className="text-sm leading-relaxed mb-6 max-w-xs" style={{ color: "rgba(248,246,231,.5)" }}>
               A thoughtful space for reflection, creativity, reinvention, and meaningful connection.
             </p>
             <div className="flex gap-3">
-              {[{ icon:<Ig/>,label:"Instagram" },{ icon:<Yt/>,label:"YouTube" },{ icon:<Li/>,label:"LinkedIn" },{ icon:<Mail size={14}/>,label:"Email",href:"mailto:hello@become.ing" }].map(s=>(
-                <a key={s.label} href={s.href??"#"} aria-label={s.label}
+              {[{ icon: <Ig />, label: "Instagram" }, { icon: <Yt />, label: "YouTube" }, { icon: <Li />, label: "LinkedIn" }, { icon: <Mail size={14} />, label: "Email", href: "mailto:hello@become.ing" }].map(s => (
+                <a key={s.label} href={s.href ?? "#"} aria-label={s.label}
                   className="w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300"
-                  style={{ border:"1px solid rgba(212,168,83,.22)", color: dim }}
-                  onMouseEnter={e=>{hover(e,"#D4A853");e.currentTarget.style.borderColor="#D4A853"}}
-                  onMouseLeave={e=>{blur(e);e.currentTarget.style.borderColor="rgba(212,168,83,.22)"}}>
+                  style={{ border: "1px solid rgba(255,233,223,.2)", color: "rgba(248,246,231,.45)" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = "#FFE9DF"; e.currentTarget.style.color = "#FFE9DF"; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,233,223,.2)"; e.currentTarget.style.color = "rgba(248,246,231,.45)"; }}>
                   {s.icon}
                 </a>
               ))}
@@ -45,12 +42,15 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color:"#D4A853" }}>Quick Links</h4>
+            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color: "#FFE9DF" }}>Quick Links</h4>
             <ul className="space-y-3">
-              {links.map(l=>(
+              {links.map(l => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm block transition-colors duration-200" style={{ color: dim }}
-                    onMouseEnter={e=>hover(e,"#EDD9A3")} onMouseLeave={e=>blur(e)}>{l.label}</Link>
+                  <Link href={l.href} className="text-sm block transition-colors duration-200" style={{ color: "rgba(248,246,231,.5)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#FFE9DF")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(248,246,231,.5)")}>
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -58,12 +58,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color:"#D4A853" }}>Contact</h4>
+            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color: "#FFE9DF" }}>Contact</h4>
             <ul className="space-y-3 text-sm">
-              {["hello@become.ing","Collaborations","Art Inquiries","Media & Press"].map(t=>(
+              {["hello@become.ing", "Collaborations", "Art Inquiries", "Media & Press"].map(t => (
                 <li key={t}>
-                  <a href={t.includes("@")?`mailto:${t}`:"#"} className="block transition-colors duration-200" style={{ color: dim }}
-                    onMouseEnter={e=>hover(e,"#EDD9A3")} onMouseLeave={e=>blur(e)}>{t}</a>
+                  <a href={t.includes("@") ? `mailto:${t}` : "#"} className="block transition-colors duration-200" style={{ color: "rgba(248,246,231,.5)" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#FFE9DF")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(248,246,231,.5)")}>
+                    {t}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -71,25 +74,27 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color:"#D4A853" }}>Stay Connected</h4>
-            <p className="text-sm mb-5" style={{ color: dim }}>Receive thoughtful reflections and updates in your inbox.</p>
-            <Link href="/newsletter" className="inline-block text-white text-xs tracking-widest uppercase px-5 py-3 transition-all duration-300"
-              style={{ background:"linear-gradient(135deg,#8B0E18,#A8192A)" }}
-              onMouseEnter={e=>(e.currentTarget.style.background="#A8192A")}
-              onMouseLeave={e=>(e.currentTarget.style.background="linear-gradient(135deg,#8B0E18,#A8192A)")}>
+            <h4 className="text-xs tracking-widest uppercase mb-5" style={{ color: "#FFE9DF" }}>Stay Connected</h4>
+            <p className="text-sm mb-5" style={{ color: "rgba(248,246,231,.5)" }}>Receive thoughtful reflections and updates in your inbox.</p>
+            <Link href="/newsletter" className="inline-block text-white text-xs tracking-widest uppercase px-5 py-3 transition-colors"
+              style={{ background: "#70090F" }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#560008")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#70090F")}>
               Subscribe
             </Link>
           </div>
         </div>
 
         <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3"
-          style={{ borderTop:"1px solid rgba(212,168,83,.13)" }}>
-          <p className="text-xs" style={{ color:"rgba(245,239,230,.28)" }}>© {new Date().getFullYear()} Become.ing. All rights reserved.</p>
-          <div className="flex gap-5 text-xs" style={{ color:"rgba(245,239,230,.28)" }}>
-            {["Privacy Policy","Terms of Use"].map(t=>(
-              <a key={t} href="#" className="transition-colors duration-200"
-                onMouseEnter={e=>(e.currentTarget.style.color="#D4A853")}
-                onMouseLeave={e=>(e.currentTarget.style.color="rgba(245,239,230,.28)")}>{t}</a>
+          style={{ borderTop: "1px solid rgba(255,233,223,.1)" }}>
+          <p className="text-xs" style={{ color: "rgba(248,246,231,.28)" }}>© {new Date().getFullYear()} Become.ing. All rights reserved.</p>
+          <div className="flex gap-5 text-xs" style={{ color: "rgba(248,246,231,.28)" }}>
+            {["Privacy Policy", "Terms of Use"].map(t => (
+              <a key={t} href="#" className="transition-colors"
+                onMouseEnter={e => (e.currentTarget.style.color = "#FFE9DF")}
+                onMouseLeave={e => (e.currentTarget.style.color = "rgba(248,246,231,.28)")}>
+                {t}
+              </a>
             ))}
           </div>
         </div>

@@ -5,9 +5,11 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const B = "#70090F", B2 = "#560008", BL = "#FFE9DF", IV = "#F8F6E7";
+
 const navLinks = [
   { href: "/",           label: "Home" },
-  { href: "/about",      label: "About" },
+  { href: "/about",      label: "About Us" },
   { href: "/blogs",      label: "Blogs" },
   { href: "/podcast",    label: "Podcast" },
   { href: "/books",      label: "Books" },
@@ -37,26 +39,22 @@ export default function Navigation() {
       <motion.header
         initial={{ y: -72, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: .7, ease: [.22,1,.36,1] }}
+        transition={{ duration: .7, ease: [.22, 1, .36, 1] }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={scrolled
-          ? { background: "rgba(253,250,244,.97)", backdropFilter: "blur(18px)", boxShadow: "0 1px 0 rgba(212,168,83,.2), 0 4px 24px rgba(26,10,10,.06)" }
+          ? { background: `rgba(248,246,231,.97)`, backdropFilter: "blur(18px)", boxShadow: `0 1px 0 rgba(112,9,15,.15), 0 4px 24px rgba(44,44,44,.06)` }
           : { background: "transparent" }
         }
       >
-        {/* Gold top line */}
-        <div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-          style={{ background: "linear-gradient(90deg,transparent,rgba(212,168,83,.45),transparent)" }} />
-
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between gap-4">
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 text-xl sm:text-2xl tracking-wide"
-            style={{ fontFamily: "'TheSeasons',Georgia,serif", color: scrolled ? "#8B0E18" : "#F5EFE6" }}>
+            style={{ fontFamily: "'TheSeasons',Georgia,serif", color: scrolled ? B : "#ffffff" }}>
             Become.ing
           </Link>
 
-          {/* Desktop links */}
+          {/* Desktop nav */}
           <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link, i) => {
               const active = pathname === link.href;
@@ -67,10 +65,10 @@ export default function Navigation() {
                   transition={{ delay: .08 + i * .06 }}>
                   <Link href={link.href}
                     className="relative text-xs xl:text-sm tracking-wider uppercase group transition-colors duration-200"
-                    style={{ color: scrolled ? (active ? "#8B0E18" : "#2D1F1A") : (active ? "#EDD9A3" : "rgba(245,239,230,.75)") }}>
+                    style={{ color: scrolled ? (active ? B : "#2C2C2C") : (active ? BL : "rgba(255,255,255,.8)") }}>
                     {link.label}
                     <span className="absolute -bottom-0.5 left-0 h-px transition-all duration-300 group-hover:w-full"
-                      style={{ background: "#D4A853", width: active ? "100%" : "0%" }} />
+                      style={{ background: B, width: active ? "100%" : "0%" }} />
                   </Link>
                 </motion.li>
               );
@@ -81,18 +79,18 @@ export default function Navigation() {
           <motion.div className="hidden lg:block flex-shrink-0"
             initial={{ opacity: 0, scale: .92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .55 }}>
             <Link href="/newsletter"
-              className="relative overflow-hidden group inline-block text-white text-xs tracking-widest uppercase px-5 py-2.5 transition-colors"
-              style={{ background: "linear-gradient(135deg,#8B0E18,#A8192A)" }}>
+              className="relative overflow-hidden group inline-block text-white text-xs tracking-widest uppercase px-5 py-2.5"
+              style={{ background: B }}>
               <span className="relative z-10">Join Community</span>
               <span className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                style={{ background: "#A8192A" }} />
+                style={{ background: B2 }} />
             </Link>
           </motion.div>
 
           {/* Burger */}
           <motion.button onClick={() => setOpen(!open)}
             className="lg:hidden p-2 -mr-1 flex-shrink-0"
-            style={{ color: scrolled ? "#8B0E18" : "#F5EFE6" }}
+            style={{ color: scrolled ? B : "#ffffff" }}
             aria-label={open ? "Close menu" : "Open menu"}
             whileTap={{ scale: .88 }}>
             <AnimatePresence mode="wait" initial={false}>
@@ -111,15 +109,14 @@ export default function Navigation() {
         {open && (
           <>
             <motion.div className="fixed inset-0 z-40 lg:hidden"
-              style={{ background: "rgba(26,10,10,.6)", backdropFilter: "blur(4px)" }}
+              style={{ background: "rgba(44,44,44,.55)", backdropFilter: "blur(4px)" }}
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setOpen(false)} />
-
             <motion.div
               className="fixed top-[72px] left-0 right-0 z-50 lg:hidden overflow-y-auto"
-              style={{ background: "#FDFAF4", maxHeight: "calc(100dvh - 72px)", borderTop: "1px solid rgba(212,168,83,.25)", boxShadow: "0 8px 32px rgba(26,10,10,.15)" }}
+              style={{ background: IV, maxHeight: "calc(100dvh - 72px)", borderTop: `1px solid rgba(112,9,15,.15)`, boxShadow: "0 8px 32px rgba(44,44,44,.12)" }}
               initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: .32, ease: [.22,1,.36,1] }}>
+              transition={{ duration: .32, ease: [.22, 1, .36, 1] }}>
               <ul className="px-5 py-4 flex flex-col">
                 {navLinks.map((link, i) => (
                   <motion.li key={link.href}
@@ -127,16 +124,16 @@ export default function Navigation() {
                     transition={{ delay: i * .04 }}>
                     <Link href={link.href}
                       className="flex items-center justify-between py-3.5 text-sm tracking-wider uppercase transition-colors"
-                      style={{ color: pathname === link.href ? "#8B0E18" : "#2D1F1A", borderBottom: "1px solid rgba(212,168,83,.18)" }}>
+                      style={{ color: pathname === link.href ? B : "#2C2C2C", borderBottom: `1px solid rgba(112,9,15,.12)` }}>
                       {link.label}
-                      {pathname === link.href && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: "#D4A853" }} />}
+                      {pathname === link.href && <span className="w-1.5 h-1.5 rounded-full" style={{ background: B }} />}
                     </Link>
                   </motion.li>
                 ))}
                 <motion.li className="mt-4 mb-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: .32 }}>
                   <Link href="/newsletter"
                     className="block text-white text-center text-sm tracking-widest uppercase py-3.5"
-                    style={{ background: "linear-gradient(135deg,#8B0E18,#A8192A)" }}>
+                    style={{ background: B }}>
                     Join Community
                   </Link>
                 </motion.li>

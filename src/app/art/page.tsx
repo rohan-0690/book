@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { artworks } from "@/lib/data";
 import { X, MessageCircle, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
-const C = { cr:"#8B0E18",crMd:"#A8192A",gold:"#D4A853",goldLt:"#EDD9A3",cream:"#FDFAF4",ink:"#1A0A0A",stone:"#7A5C52" };
+const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
 const artists = ["All",...Array.from(new Set(artworks.map(a=>a.artist)))];
 const PB = [133,100,120,110,133,100,120,133,100]; // paddingBottom %
 
@@ -26,7 +26,7 @@ export default function ArtPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6" style={{ background: C.ink, minHeight:"380px" }}>
+      <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6" style={{ background:"#1A0A0A", minHeight:"380px" }}>
         <div className="absolute inset-0 z-0">
           <Image src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1800&q=70"
             alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" priority />
@@ -36,16 +36,16 @@ export default function ArtPage() {
         <div className="relative z-20 max-w-4xl mx-auto text-center">
           <motion.div className="flex items-center justify-center gap-3 mb-5"
             initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
-            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
-            <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(212,168,83,.7)" }}>Art Collective</span>
-            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
+            <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
+            <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(112,9,15,.7)" }}>Art Collective</span>
+            <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
           </motion.div>
           <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-5"
             style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
             initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
             transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Become.ing
-            <br /><span className="italic" style={{ color: C.goldLt }}>Art Collective</span>
+            <br /><span className="italic" style={{ color:"#FFE9DF" }}>Art Collective</span>
           </motion.h1>
           <motion.p className="text-sm sm:text-lg max-w-xl mx-auto" style={{ color:"rgba(245,239,230,.52)" }}
             initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.65 }}>
@@ -56,19 +56,19 @@ export default function ArtPage() {
 
       {/* FILTER */}
       <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
-        style={{ background: C.cream, borderBottom:`1px solid rgba(139,14,24,.1)` }}>
+        style={{ background:"#F8F6E7", borderBottom:`1px solid rgba(112,9,15,.1)` }}>
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
           {artists.map(a=>(
             <motion.button key={a} onClick={()=>setFilter(a)}
               className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
-              style={ filter===a ? { background: C.cr, color:"#fff" } : { background:"#fff", color: C.ink, border:`1px solid rgba(139,14,24,.2)` }}
+              style={ filter===a ? { background:"#70090F", color:"#fff" } : { background:"#fff", color: C.INK, border:`1px solid rgba(112,9,15,.2)` }}
               whileHover={{ scale:1.04 }} whileTap={{ scale:.96 }}>{a}</motion.button>
           ))}
         </div>
       </section>
 
       {/* MASONRY — paddingBottom on every card */}
-      <section className="py-10 sm:py-16 px-3 sm:px-6 pb-20 sm:pb-28" style={{ background: C.cream }}>
+      <section className="py-10 sm:py-16 px-3 sm:px-6 pb-20 sm:pb-28" style={{ background: C.IV }}>
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div key={filter} className="masonry-grid"
@@ -88,11 +88,11 @@ export default function ArtPage() {
                       sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" />
                     {/* gold border */}
                     <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ border:"1px solid rgba(212,168,83,.55)" }} />
+                      style={{ border:"1px solid rgba(112,9,15,.55)" }} />
                     <AnimatePresence>
                       {hovId===art.id && (
                         <motion.div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-4"
-                          style={{ background:"linear-gradient(180deg,rgba(139,14,24,.75) 0%,rgba(26,10,10,.9) 100%)" }}
+                          style={{ background:"linear-gradient(180deg,rgba(112,9,15,.75) 0%,rgba(26,10,10,.9) 100%)" }}
                           initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:.22 }}>
                           <motion.div initial={{ y:8, opacity:0 }} animate={{ y:0, opacity:1 }} transition={{ delay:.04 }}>
                             <ZoomIn size={24} className="text-white mb-1" />
@@ -102,7 +102,7 @@ export default function ArtPage() {
                             initial={{ y:8, opacity:0 }} animate={{ y:0, opacity:1 }} transition={{ delay:.09 }}>
                             {art.title}
                           </motion.p>
-                          <motion.p className="text-center text-xs sm:text-sm" style={{ color:"rgba(212,168,83,.85)" }}
+                          <motion.p className="text-center text-xs sm:text-sm" style={{ color:"rgba(112,9,15,.85)" }}
                             initial={{ y:8, opacity:0 }} animate={{ y:0, opacity:1 }} transition={{ delay:.13 }}>
                             {art.artist} · {art.medium}
                           </motion.p>
@@ -125,14 +125,14 @@ export default function ArtPage() {
             onClick={()=>setSelected(null)}>
             <div className="absolute inset-0" style={{ background:"rgba(26,10,10,.93)", backdropFilter:"blur(6px)" }} />
             <motion.div className="relative w-full max-w-4xl flex flex-col md:flex-row overflow-hidden shadow-2xl"
-              style={{ background: C.cream, maxHeight:"92dvh" }}
+              style={{ background:"#F8F6E7", maxHeight:"92dvh" }}
               initial={{ scale:.93, y:20, opacity:0 }} animate={{ scale:1, y:0, opacity:1 }} exit={{ scale:.93, y:20, opacity:0 }}
               transition={{ duration:.38, ease:[.22,1,.36,1] }}
               onClick={e=>e.stopPropagation()}>
               {/* Close */}
               <motion.button onClick={()=>setSelected(null)}
                 className="absolute top-3 right-3 z-20 w-9 h-9 flex items-center justify-center text-white transition-colors"
-                style={{ background: C.ink }} whileHover={{ scale:1.1, rotate:90 }} whileTap={{ scale:.9 }}>
+                style={{ background:"#1A0A0A" }} whileHover={{ scale:1.1, rotate:90 }} whileTap={{ scale:.9 }}>
                 <X size={15} />
               </motion.button>
               {/* Prev */}
@@ -168,15 +168,15 @@ export default function ArtPage() {
                   style={{ width:"100%", maxWidth:"320px" }}
                   initial={{ opacity:0, x:10 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0 }} transition={{ duration:.3, delay:.05 }}>
                   <div>
-                    <span className="text-[10px] sm:text-xs tracking-widest uppercase block mb-3" style={{ color: C.gold }}>{selected.medium}</span>
-                    <h2 className="text-2xl sm:text-3xl mb-2 leading-tight" style={{ fontFamily:"'TheSeasons',Georgia,serif", color: C.ink }}>{selected.title}</h2>
-                    <p className="text-sm mb-1" style={{ color: C.cr }}>{selected.artist}</p>
-                    <p className="text-xs mb-5" style={{ color: C.stone }}>{selected.width}</p>
-                    <p className="text-sm leading-relaxed" style={{ color: C.stone }}>{selected.description}</p>
+                    <span className="text-[10px] sm:text-xs tracking-widest uppercase block mb-3" style={{ color:"#70090F" }}>{selected.medium}</span>
+                    <h2 className="text-2xl sm:text-3xl mb-2 leading-tight" style={{ fontFamily:"'TheSeasons',Georgia,serif", color: C.INK }}>{selected.title}</h2>
+                    <p className="text-sm mb-1" style={{ color:"#70090F" }}>{selected.artist}</p>
+                    <p className="text-xs mb-5" style={{ color:"#4A4A4A" }}>{selected.width}</p>
+                    <p className="text-sm leading-relaxed" style={{ color:"#4A4A4A" }}>{selected.description}</p>
                   </div>
                   <motion.a href={waUrl} target="_blank" rel="noopener noreferrer"
                     className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-white text-xs sm:text-sm tracking-widest uppercase px-5 py-3.5 sm:py-4 transition-colors"
-                    style={{ background:`linear-gradient(135deg,${C.cr},${C.crMd})` }}
+                    style={{ background:`linear-gradient(135deg,${C.B},${C.B2})` }}
                     whileHover={{ scale:1.02 }} whileTap={{ scale:.97 }}>
                     <MessageCircle size={15} /> Enquire on WhatsApp
                   </motion.a>

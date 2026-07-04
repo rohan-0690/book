@@ -8,7 +8,7 @@ import BlogCard from "@/components/BlogCard";
 import { blogPosts, blogCategories } from "@/lib/data";
 import { Search } from "lucide-react";
 
-const C = { cr:"#8B0E18",gold:"#D4A853",blush:"#F7EDE4",cream:"#FDFAF4",ink:"#1A0A0A",stone:"#7A5C52" };
+const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
 
 export default function BlogsPage() {
   const [cat, setCat]     = useState("All");
@@ -28,7 +28,7 @@ export default function BlogsPage() {
   return (
     <>
       {/* HERO — z-index pattern */}
-      <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6" style={{ background: C.ink, minHeight:"360px" }}>
+      <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6" style={{ background:"#1A0A0A", minHeight:"360px" }}>
         <div className="absolute inset-0 z-0">
           <Image src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70"
             alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" />
@@ -38,9 +38,9 @@ export default function BlogsPage() {
         <div className="relative z-20 max-w-4xl mx-auto text-center">
           <motion.div className="flex items-center justify-center gap-3 mb-5"
             initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
-            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
-            <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(212,168,83,.7)" }}>The Journal</span>
-            <span className="h-px w-8" style={{ background:"rgba(212,168,83,.4)" }} />
+            <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
+            <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(112,9,15,.7)" }}>The Journal</span>
+            <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
           </motion.div>
           <motion.h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-5"
             style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
@@ -58,21 +58,21 @@ export default function BlogsPage() {
 
       {/* SEARCH + FILTER */}
       <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
-        style={{ background: C.cream, borderBottom:`1px solid rgba(139,14,24,.1)` }}>
+        style={{ background:"#F8F6E7", borderBottom:`1px solid rgba(112,9,15,.1)` }}>
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-between">
           <div className="relative w-full sm:w-72">
-            <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color:"rgba(139,14,24,.45)" }} />
+            <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color:"rgba(112,9,15,.45)" }} />
             <input type="text" placeholder="Search articles..." value={q}
               onChange={e=>{ setQ(e.target.value); setPage(1); }}
               className="w-full text-sm pl-10 pr-4 py-3 focus:outline-none transition-colors"
-              style={{ background:"#fff", border:"1px solid rgba(139,14,24,.18)", color: C.ink }}
-              onFocus={e=>(e.target.style.borderColor=C.cr)} onBlur={e=>(e.target.style.borderColor="rgba(139,14,24,.18)")} />
+              style={{ background:"#fff", border:"1px solid rgba(112,9,15,.18)", color: C.INK }}
+              onFocus={e=>(e.target.style.borderColor=C.B)} onBlur={e=>(e.target.style.borderColor="rgba(112,9,15,.18)")} />
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
             {blogCategories.map(c=>(
               <motion.button key={c} onClick={()=>{ setCat(c); setPage(1); }}
                 className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
-                style={ cat===c ? { background: C.cr, color:"#fff" } : { background:"#fff", color: C.ink, border:"1px solid rgba(139,14,24,.2)" }}
+                style={ cat===c ? { background:"#70090F", color:"#fff" } : { background:"#fff", color: C.INK, border:"1px solid rgba(112,9,15,.2)" }}
                 whileHover={{ scale:1.04 }} whileTap={{ scale:.96 }}>{c}</motion.button>
             ))}
           </div>
@@ -81,7 +81,7 @@ export default function BlogsPage() {
 
       {/* FEATURED */}
       {featuredPost && cat==="All" && !q && (
-        <section className="py-10 sm:py-12 px-4 sm:px-6" style={{ background: C.cream }}>
+        <section className="py-10 sm:py-12 px-4 sm:px-6" style={{ background: C.IV }}>
           <div className="max-w-7xl mx-auto">
             <SectionReveal><BlogCard post={featuredPost} featured /></SectionReveal>
           </div>
@@ -89,7 +89,7 @@ export default function BlogsPage() {
       )}
 
       {/* GRID */}
-      <section className="py-8 sm:py-12 px-4 sm:px-6 pb-20 sm:pb-28" style={{ background: C.cream }}>
+      <section className="py-8 sm:py-12 px-4 sm:px-6 pb-20 sm:pb-28" style={{ background: C.IV }}>
         <div className="max-w-7xl mx-auto">
           {paged.length > 0 ? (
             <>
@@ -103,7 +103,7 @@ export default function BlogsPage() {
                   {Array.from({length:totalPages},(_,i)=>i+1).map(pg=>(
                     <button key={pg} onClick={()=>setPage(pg)}
                       className="w-10 h-10 text-sm transition-colors"
-                      style={ pg===page ? { background: C.cr, color:"#fff" } : { border:`1px solid rgba(139,14,24,.3)`, color: C.ink }}>
+                      style={ pg===page ? { background:"#70090F", color:"#fff" } : { border:`1px solid rgba(112,9,15,.3)`, color: C.INK }}>
                       {pg}
                     </button>
                   ))}
@@ -112,7 +112,7 @@ export default function BlogsPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-lg" style={{ color: C.stone }}>No articles found. Try a different search or category.</p>
+              <p className="text-lg" style={{ color:"#4A4A4A" }}>No articles found. Try a different search or category.</p>
             </div>
           )}
         </div>
