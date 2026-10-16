@@ -1,19 +1,22 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { artworks } from "@/lib/data";
+import { getPublicArtworks, type Artwork } from "@/lib/store";
 import { X, MessageCircle, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
-const artists = ["All",...Array.from(new Set(artworks.map(a=>a.artist)))];
-const PB = [133,100,120,110,133,100,120,133,100]; // paddingBottom %
+const PB = [133,100,120,110,133,100,120,133,100];
 
 export default function ArtPage() {
   const [filter, setFilter] = useState("All");
-  const [selected, setSelected] = useState<typeof artworks[0]|null>(null);
+  const [selected, setSelected] = useState<Artwork|null>(null);
   const [hovId, setHovId]   = useState<number|null>(null);
+  const [artworks, setArtworks] = useState<Artwork[]>([]);
 
+  useEffect(() => { setArtworks(getPublicArtworks()); }, []);
+
+  const artists = ["All",...Array.from(new Set(artworks.map(a=>a.artist)))];
   const filtered = filter==="All" ? artworks : artworks.filter(a=>a.artist===filter);
   const idx = selected ? filtered.findIndex(a=>a.id===selected.id) : -1;
   const goPrev = () => idx>0 && setSelected(filtered[idx-1]);
@@ -171,7 +174,7 @@ export default function ArtPage() {
                     <span className="text-[10px] sm:text-xs tracking-widest uppercase block mb-3" style={{ color:"#70090F" }}>{selected.medium}</span>
                     <h2 className="text-2xl sm:text-3xl mb-2 leading-tight" style={{ fontFamily:"'TheSeasons',Georgia,serif", color: C.INK }}>{selected.title}</h2>
                     <p className="text-sm mb-1" style={{ color:"#70090F" }}>{selected.artist}</p>
-                    <p className="text-xs mb-5" style={{ color:"#4A4A4A" }}>{selected.width}</p>
+                    <p className="text-xs mb-5" style={{ color:"#4A4A4A" }}>{selected.dimensions}</p>
                     <p className="text-sm leading-relaxed" style={{ color:"#4A4A4A" }}>{selected.description}</p>
                   </div>
                   <motion.a href={waUrl} target="_blank" rel="noopener noreferrer"

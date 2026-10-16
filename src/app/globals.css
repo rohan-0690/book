@@ -68,6 +68,39 @@ img { max-width: 100%; }
 /* ─── Divider ───────────────────────────── */
 .divider-burg { height: 1px; background: linear-gradient(90deg, transparent, #70090F 30%, #70090F 70%, transparent); }
 
+/* ─── Global Uppercase Typography ──────── */
+/* All visible text runs uppercase — soft, airy, editorial */
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, a, li, button, label, cite,
+blockquote, figcaption, caption,
+[class*="tracking-"] {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Headings get slightly more air */
+h1 { letter-spacing: 0.08em; line-height: 1.1; }
+h2 { letter-spacing: 0.07em; line-height: 1.15; }
+h3 { letter-spacing: 0.07em; line-height: 1.2; }
+h4, h5, h6 { letter-spacing: 0.06em; }
+
+/* Fine label / caption text needs more breathing room */
+.text-\[9px\], .text-\[10px\], .text-xs {
+  letter-spacing: 0.3em;
+}
+
+/* Tracking overrides — preserve existing widest/wider for nav/labels */
+.tracking-widest { letter-spacing: 0.4em !important; }
+.tracking-wider  { letter-spacing: 0.2em !important; }
+
+/* Blockquotes: italic serif, light weight — don't over-compress */
+blockquote {
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  line-height: 1.55;
+}
+
 /* ─── Prose ─────────────────────────────── */
 .prose p          { margin-bottom: 1.5rem; line-height: 1.85; }
 .prose blockquote { margin: 2.5rem 0; }

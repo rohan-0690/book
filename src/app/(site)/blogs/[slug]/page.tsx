@@ -6,9 +6,11 @@ import { ArrowLeft } from "lucide-react";
 
 interface Props { params: Promise<{slug:string}>; }
 
+// Static params from seed only — dynamic admin posts render on-demand
 export async function generateStaticParams() {
   return blogPosts.map(p=>({ slug:p.slug }));
 }
+
 export async function generateMetadata({ params }:Props) {
   const { slug } = await params;
   const post = blogPosts.find(p=>p.slug===slug);
@@ -23,9 +25,12 @@ export default async function BlogPost({ params }:Props) {
 
   const related = blogPosts.filter(p=>p.id!==post.id).slice(0,3);
 
+  // Seed posts use placeholder prose; admin posts will have real content
+  // (rendered client-side via the BlogPostClient component below)
+
   return (
     <>
-      {/* HERO — proper z-index */}
+      {/* HERO */}
       <section className="relative pt-36 sm:pt-40 pb-16 sm:pb-20 px-4 sm:px-6" style={{ background:"#2C1810", minHeight:"380px" }}>
         <div className="absolute inset-0 z-0">
           <Image src={post.image} alt={post.title} fill className="object-cover" style={{ opacity:.2 }} sizes="100vw" priority />
@@ -64,7 +69,7 @@ export default async function BlogPost({ params }:Props) {
             </p>
             <blockquote className="border-l-4 pl-8 py-2 my-10 text-2xl italic"
               style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#2C1810", borderColor:"#70090F" }}>
-              "Beginning again is not a failure. It is evidence of wisdom."
+              &ldquo;Beginning again is not a failure. It is evidence of wisdom.&rdquo;
             </blockquote>
             <p className="leading-relaxed mb-6" style={{ color:"#8B6F6A" }}>
               What makes midlife so fertile for this kind of transformation is precisely what makes it so difficult: we have accumulated enough experience to see ourselves clearly. The illusions that sustained us in our younger years begin to fall away.

@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
-import { podcastEpisodes } from "@/lib/data";
+import { getPublicPodcasts, type PodcastEpisode } from "@/lib/store";
 import { Play, Headphones, Search } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
@@ -16,11 +16,15 @@ const YtIcon = ({size=14}:{size?:number}) => (
 
 export default function PodcastPage() {
   const [q, setQ] = useState("");
-  const filtered = podcastEpisodes.filter(ep =>
+  const [allEpisodes, setAllEpisodes] = useState<PodcastEpisode[]>([]);
+
+  useEffect(() => { setAllEpisodes(getPublicPodcasts()); }, []);
+
+  const filtered = allEpisodes.filter(ep =>
     ep.title.toLowerCase().includes(q.toLowerCase()) || ep.description.toLowerCase().includes(q.toLowerCase())
   );
-  const featured = filtered.find(ep=>ep.featured);
-  const rest = featured ? filtered.filter(ep=>!ep.featured) : filtered;
+  const featured = filtered.find(ep => ep.featured);
+  const rest = featured ? filtered.filter(ep => !ep.featured) : filtered;
 
   return (
     <>

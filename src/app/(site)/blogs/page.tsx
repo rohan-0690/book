@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
 import BlogCard from "@/components/BlogCard";
-import { blogPosts, blogCategories } from "@/lib/data";
+import { getPublicBlogs, type BlogPost } from "@/lib/store";
+import { blogCategories } from "@/lib/data";
 import { Search } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
@@ -14,10 +15,14 @@ export default function BlogsPage() {
   const [cat, setCat]     = useState("All");
   const [q, setQ]         = useState("");
   const [page, setPage]   = useState(1);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const PER = 6;
-  const featuredPost = blogPosts.find(p=>p.featured);
 
-  const filtered = blogPosts.filter(p => {
+  useEffect(() => { setAllPosts(getPublicBlogs()); }, []);
+
+  const featuredPost = allPosts.find(p=>p.featured);
+
+  const filtered = allPosts.filter(p => {
     const mc = cat==="All" || p.category===cat;
     const mq = p.title.toLowerCase().includes(q.toLowerCase()) || p.excerpt.toLowerCase().includes(q.toLowerCase());
     return mc && mq;

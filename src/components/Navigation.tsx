@@ -9,7 +9,7 @@ const B = "#70090F", B2 = "#560008", BL = "#FFE9DF", IV = "#F8F6E7";
 
 const navLinks = [
   { href: "/",           label: "Home" },
-  { href: "/about",      label: "About Us" },
+  { href: "/about",      label: "About" },
   { href: "/blogs",      label: "Blogs" },
   { href: "/podcast",    label: "Podcast" },
   { href: "/books",      label: "Books" },

@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Become.ing — A Journey of Reinvention",
@@ -26,13 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <Navigation />
-        <PageTransition>
-          <main>{children}</main>
-        </PageTransition>
-        <Footer />
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
