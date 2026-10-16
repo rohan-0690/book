@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { adminLogout, getPublicBlogs, getPublicPodcasts, getPublicArtworks } from "@/lib/store";
+import { adminLogout, getBlogs, getPodcasts, getArtworks } from "@/lib/store";
 import { BookOpen, Headphones, Palette, LogOut, ExternalLink, PenSquare } from "lucide-react";
 
 const B = "#70090F", B2 = "#560008", BL = "#FFE9DF", IV = "#F8F6E7", CH = "#2C2C2C";
@@ -36,10 +36,8 @@ export default function DashboardPage() {
   const [counts, setCounts] = useState({ blogs: 0, podcasts: 0, artworks: 0 });
 
   useEffect(() => {
-    setCounts({
-      blogs:    getPublicBlogs().length,
-      podcasts: getPublicPodcasts().length,
-      artworks: getPublicArtworks().length,
+    Promise.all([getBlogs(), getPodcasts(), getArtworks()]).then(([blogs, podcasts, artworks]) => {
+      setCounts({ blogs: blogs.length, podcasts: podcasts.length, artworks: artworks.length });
     });
   }, []);
 

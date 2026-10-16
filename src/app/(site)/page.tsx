@@ -7,7 +7,7 @@ import type { Variants } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
 import BlogCard from "@/components/BlogCard";
 import { blogPosts, podcastEpisodes, books, artworks } from "@/lib/data";
-import { getPublicBlogs, getPublicPodcasts, getPublicArtworks } from "@/lib/store";
+import { getBlogs, getPodcasts, getArtworks } from "@/lib/store";
 import { Play, BookOpen, ArrowRight, Headphones } from "lucide-react";
 
 const B="#70090F",B2="#560008",BL="#FFE9DF",IV="#F8F6E7",CH="#2C2C2C",ST="#4A4A4A";
@@ -23,14 +23,14 @@ export default function Home() {
   const textY=useTransform(scrollYProgress,[0,1],["0%","26%"]);
   const fadeOut=useTransform(scrollYProgress,[0,.65],[1,0]);
 
-  const [allBlogs, setAllBlogs] = useState<ReturnType<typeof getPublicBlogs>>([]);
-  const [allPodcasts, setAllPodcasts] = useState<ReturnType<typeof getPublicPodcasts>>([]);
-  const [allArtworks, setAllArtworks] = useState<ReturnType<typeof getPublicArtworks>>([]);
+  const [allBlogs,    setAllBlogs]    = useState<Awaited<ReturnType<typeof getBlogs>>>([]);
+  const [allPodcasts, setAllPodcasts] = useState<Awaited<ReturnType<typeof getPodcasts>>>([]);
+  const [allArtworks, setAllArtworks] = useState<Awaited<ReturnType<typeof getArtworks>>>([]);
 
   useEffect(() => {
-    setAllBlogs(getPublicBlogs());
-    setAllPodcasts(getPublicPodcasts());
-    setAllArtworks(getPublicArtworks());
+    getBlogs().then(setAllBlogs);
+    getPodcasts().then(setAllPodcasts);
+    getArtworks().then(setAllArtworks);
   }, []);
 
   const featuredPost  = allBlogs.find(p=>p.featured) ?? allBlogs[0];
