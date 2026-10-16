@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { getPublicArtworks, type Artwork } from "@/lib/store";
+import { getArtworks, type Artwork } from "@/lib/store";
 import { X, MessageCircle, ZoomIn, ChevronLeft, ChevronRight } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
@@ -14,7 +14,7 @@ export default function ArtPage() {
   const [hovId, setHovId]   = useState<number|null>(null);
   const [artworks, setArtworks] = useState<Artwork[]>([]);
 
-  useEffect(() => { setArtworks(getPublicArtworks()); }, []);
+  useEffect(() => { getArtworks().then(setArtworks); }, []);
 
   const artists = ["All",...Array.from(new Set(artworks.map(a=>a.artist)))];
   const filtered = filter==="All" ? artworks : artworks.filter(a=>a.artist===filter);

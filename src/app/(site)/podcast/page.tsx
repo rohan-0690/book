@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
-import { getPublicPodcasts, type PodcastEpisode } from "@/lib/store";
+import { getPodcasts, type PodcastEpisode } from "@/lib/store";
 import { Play, Headphones, Search } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
@@ -18,7 +18,7 @@ export default function PodcastPage() {
   const [q, setQ] = useState("");
   const [allEpisodes, setAllEpisodes] = useState<PodcastEpisode[]>([]);
 
-  useEffect(() => { setAllEpisodes(getPublicPodcasts()); }, []);
+  useEffect(() => { getPodcasts().then(setAllEpisodes); }, []);
 
   const filtered = allEpisodes.filter(ep =>
     ep.title.toLowerCase().includes(q.toLowerCase()) || ep.description.toLowerCase().includes(q.toLowerCase())
@@ -121,12 +121,12 @@ export default function PodcastPage() {
                   <p className="leading-relaxed mb-3 sm:mb-4 text-sm sm:text-[15px]" style={{ color:"#4A4A4A" }}>{featured.description}</p>
                   <p className="text-xs mb-6 sm:mb-8" style={{ color:"#70090F" }}>{featured.date} · {featured.duration}</p>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
-                    <a href={featured.youtubeUrl}
+                    <a href={featured.youtube_url}
                       className="inline-flex items-center gap-2 text-white text-xs tracking-widest uppercase px-4 sm:px-5 py-2.5 sm:py-3 hover:opacity-85 transition-opacity"
                       style={{ background:`linear-gradient(135deg,${C.B},${C.B2})` }}>
                       <YtIcon size={13} /> Watch on YouTube
                     </a>
-                    <a href={featured.spotifyUrl}
+                    <a href={featured.spotify_url}
                       className="inline-flex items-center gap-2 text-xs tracking-widest uppercase px-4 sm:px-5 py-2.5 sm:py-3 transition-colors"
                       style={{ border:`1px solid ${C.B}`, color:"#70090F" }}
                       onMouseEnter={e=>(e.currentTarget.style.background=C.BL)}
@@ -173,10 +173,10 @@ export default function PodcastPage() {
                       <p className="text-xs sm:text-sm leading-relaxed line-clamp-2" style={{ color:"#4A4A4A" }}>{ep.description}</p>
                     </div>
                     <div className="flex gap-2 sm:gap-3 mt-3">
-                      <a href={ep.youtubeUrl}
+                      <a href={ep.youtube_url}
                         className="inline-flex items-center gap-1.5 text-white text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 hover:opacity-85"
                         style={{ background: C.B }}><YtIcon size={11} /> YouTube</a>
-                      <a href={ep.spotifyUrl}
+                      <a href={ep.spotify_url}
                         className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors"
                         style={{ border:`1px solid rgba(112,9,15,.35)`, color:"#70090F" }}><Headphones size={11} /> Listen</a>
                     </div>

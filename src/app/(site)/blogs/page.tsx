@@ -5,110 +5,99 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
 import BlogCard from "@/components/BlogCard";
-import { getPublicBlogs, type BlogPost } from "@/lib/store";
+import { getBlogs, type BlogPost } from "@/lib/store";
 import { blogCategories } from "@/lib/data";
 import { Search } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
 
 export default function BlogsPage() {
-  const [cat, setCat]     = useState("All");
-  const [q, setQ]         = useState("");
-  const [page, setPage]   = useState(1);
+  const [cat,      setCat]      = useState("All");
+  const [q,        setQ]        = useState("");
+  const [page,     setPage]     = useState(1);
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
   const PER = 6;
 
-  useEffect(() => { setAllPosts(getPublicBlogs()); }, []);
+  useEffect(() => { getBlogs().then(setAllPosts); }, []);
 
-  const featuredPost = allPosts.find(p=>p.featured);
-
+  const featuredPost = allPosts.find(p => p.featured);
   const filtered = allPosts.filter(p => {
-    const mc = cat==="All" || p.category===cat;
+    const mc = cat === "All" || p.category === cat;
     const mq = p.title.toLowerCase().includes(q.toLowerCase()) || p.excerpt.toLowerCase().includes(q.toLowerCase());
     return mc && mq;
   });
-  const totalPages = Math.ceil(filtered.length/PER);
-  const paged = filtered.slice((page-1)*PER, page*PER);
+  const totalPages = Math.ceil(filtered.length / PER);
+  const paged = filtered.slice((page - 1) * PER, page * PER);
 
   return (
     <>
-      {/* HERO — z-index pattern */}
       <section className="relative pt-36 sm:pt-40 pb-20 sm:pb-24 px-4 sm:px-6" style={{ background:"#1A0A0A", minHeight:"360px" }}>
         <div className="absolute inset-0 z-0">
-          <Image src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70"
-            alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" />
+          <Image src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1800&q=70" alt="" fill className="object-cover" style={{ opacity:.18 }} sizes="100vw" />
         </div>
-        <div className="absolute inset-0 z-10"
-          style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.6),rgba(26,10,10,.99))" }} />
+        <div className="absolute inset-0 z-10" style={{ background:"linear-gradient(to bottom,rgba(26,10,10,.6),rgba(26,10,10,.99))" }} />
         <div className="relative z-20 max-w-4xl mx-auto text-center">
-          <motion.div className="flex items-center justify-center gap-3 mb-5"
-            initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
+          <motion.div className="flex items-center justify-center gap-3 mb-5" initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.3 }}>
             <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
             <span className="text-[10px] tracking-widest uppercase" style={{ color:"rgba(112,9,15,.7)" }}>The Journal</span>
             <span className="h-px w-8" style={{ background:"rgba(112,9,15,.4)" }} />
           </motion.div>
-          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-5"
-            style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
-            initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }}
-            transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
+          <motion.h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight mb-5" style={{ fontFamily:"'TheSeasons',Georgia,serif", color:"#ffffff" }}
+            initial={{ opacity:0, y:28 }} animate={{ opacity:1, y:0 }} transition={{ delay:.4, duration:.85, ease:[.22,1,.36,1] }}>
             Stories &amp; Reflections
           </motion.h1>
-          <motion.p className="text-sm sm:text-lg max-w-xl mx-auto"
-            style={{ color:"rgba(245,239,230,.52)" }}
-            initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.65 }}>
+          <motion.p className="text-sm sm:text-lg max-w-xl mx-auto" style={{ color:"rgba(245,239,230,.52)" }} initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:.65 }}>
             Thoughtful writing on midlife, creativity, wellness, relationships, and reinvention.
           </motion.p>
         </div>
       </section>
 
-      {/* SEARCH + FILTER */}
-      <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
-        style={{ background:"#F8F6E7", borderBottom:`1px solid rgba(112,9,15,.1)` }}>
+      <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30" style={{ background:"#F8F6E7", borderBottom:`1px solid rgba(112,9,15,.1)` }}>
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-between">
           <div className="relative w-full sm:w-72">
             <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color:"rgba(112,9,15,.45)" }} />
             <input type="text" placeholder="Search articles..." value={q}
-              onChange={e=>{ setQ(e.target.value); setPage(1); }}
+              onChange={e => { setQ(e.target.value); setPage(1); }}
               className="w-full text-sm pl-10 pr-4 py-3 focus:outline-none transition-colors"
               style={{ background:"#fff", border:"1px solid rgba(112,9,15,.18)", color: C.INK }}
-              onFocus={e=>(e.target.style.borderColor=C.B)} onBlur={e=>(e.target.style.borderColor="rgba(112,9,15,.18)")} />
+              onFocus={e => (e.target.style.borderColor = C.B)} onBlur={e => (e.target.style.borderColor = "rgba(112,9,15,.18)")} />
           </div>
           <div className="flex flex-wrap gap-2 justify-center">
-            {blogCategories.map(c=>(
-              <motion.button key={c} onClick={()=>{ setCat(c); setPage(1); }}
+            {blogCategories.map(c => (
+              <motion.button key={c} onClick={() => { setCat(c); setPage(1); }}
                 className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
-                style={ cat===c ? { background:"#70090F", color:"#fff" } : { background:"#fff", color: C.INK, border:"1px solid rgba(112,9,15,.2)" }}
+                style={cat === c ? { background:"#70090F", color:"#fff" } : { background:"#fff", color: C.INK, border:"1px solid rgba(112,9,15,.2)" }}
                 whileHover={{ scale:1.04 }} whileTap={{ scale:.96 }}>{c}</motion.button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURED */}
-      {featuredPost && cat==="All" && !q && (
+      {featuredPost && cat === "All" && !q && (
         <section className="py-10 sm:py-12 px-4 sm:px-6" style={{ background: C.IV }}>
           <div className="max-w-7xl mx-auto">
-            <SectionReveal><BlogCard post={featuredPost} featured /></SectionReveal>
+            <SectionReveal><BlogCard post={{ ...featuredPost, readTime: featuredPost.read_time }} featured /></SectionReveal>
           </div>
         </section>
       )}
 
-      {/* GRID */}
       <section className="py-8 sm:py-12 px-4 sm:px-6 pb-20 sm:pb-28" style={{ background: C.IV }}>
         <div className="max-w-7xl mx-auto">
           {paged.length > 0 ? (
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
-                {paged.map((p,i)=>(
-                  <SectionReveal key={p.id} delay={i*60}><BlogCard post={p} /></SectionReveal>
+                {paged.map((p, i) => (
+                  <SectionReveal key={p.id} delay={i * 60}>
+                    <BlogCard post={{ ...p, readTime: p.read_time }} />
+                  </SectionReveal>
                 ))}
               </div>
               {totalPages > 1 && (
                 <div className="flex justify-center gap-2">
-                  {Array.from({length:totalPages},(_,i)=>i+1).map(pg=>(
-                    <button key={pg} onClick={()=>setPage(pg)}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(pg => (
+                    <button key={pg} onClick={() => setPage(pg)}
                       className="w-10 h-10 text-sm transition-colors"
-                      style={ pg===page ? { background:"#70090F", color:"#fff" } : { border:`1px solid rgba(112,9,15,.3)`, color: C.INK }}>
+                      style={pg === page ? { background:"#70090F", color:"#fff" } : { border:`1px solid rgba(112,9,15,.3)`, color: C.INK }}>
                       {pg}
                     </button>
                   ))}
@@ -117,7 +106,7 @@ export default function BlogsPage() {
             </>
           ) : (
             <div className="text-center py-20">
-              <p className="text-lg" style={{ color:"#4A4A4A" }}>No articles found. Try a different search or category.</p>
+              <p className="text-lg" style={{ color:"#4A4A4A" }}>No articles found.</p>
             </div>
           )}
         </div>
