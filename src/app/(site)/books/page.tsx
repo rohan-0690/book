@@ -1,18 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionReveal from "@/components/SectionReveal";
-import { books } from "@/lib/data";
+import { getBooks, type Book } from "@/lib/store";
 import { BookOpen, ShoppingBag } from "lucide-react";
 
 const C = { B:"#70090F",B2:"#560008",BL:"#FFE9DF",IV:"#F8F6E7",CH:"#2C2C2C",ST:"#4A4A4A",INK:"#2C2C2C" };
-const CATS = ["All","Personal Growth","Reinvention","Wellness","Creativity"];
+const ALL_CATS = ["All","Personal Growth","Reinvention","Wellness","Creativity","Relationships","Midlife","Other"];
 
 export default function BooksPage() {
-  const [cat, setCat]     = useState("All");
-  const [hov, setHov]     = useState<number|null>(null);
-  const filtered = cat==="All" ? books : books.filter(b=>b.category===cat);
+  const [cat,      setCat]  = useState("All");
+  const [hov,      setHov]  = useState<number|null>(null);
+  const [allBooks, setAll]  = useState<Book[]>([]);
+
+  useEffect(() => { getBooks().then(setAll); }, []);
+
+  // Build category list dynamically from available books
+  const cats = ["All", ...Array.from(new Set(allBooks.map(b => b.category)))];
+  const filtered = cat === "All" ? allBooks : allBooks.filter(b => b.category === cat);
 
   return (
     <>
@@ -49,7 +55,7 @@ export default function BooksPage() {
       <section className="py-5 sm:py-8 px-4 sm:px-6 sticky top-[72px] z-30"
         style={{ background:"#F8F6E7", borderBottom:`1px solid rgba(112,9,15,.1)` }}>
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
-          {CATS.map(c=>(
+          {cats.map(c=>(
             <motion.button key={c} onClick={()=>setCat(c)}
               className="text-[10px] sm:text-xs tracking-widest uppercase px-3 sm:px-4 py-2 transition-colors duration-200"
               style={ cat===c ? { background:"#70090F", color:"#fff" } : { background:"#fff", color: C.INK, border:`1px solid rgba(112,9,15,.2)` }}
@@ -75,7 +81,7 @@ export default function BooksPage() {
                   <motion.div className="relative w-full overflow-hidden mb-3 sm:mb-4" style={{ height: "220px" }}
                     animate={{ y: hov===book.id ? -10 : 0, boxShadow: hov===book.id ? "0 24px 48px rgba(112,9,15,.22)" : "0 4px 18px rgba(0,0,0,.1)" }}
                     transition={{ duration:.4, ease:[.22,1,.36,1] }}>
-                    <Image src={book.cover} alt={book.title} fill
+                    <Image src={book.cover} alt={book.title} fill unoptimized
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width:640px) 50vw, 20vw" />
                     <AnimatePresence>
@@ -83,7 +89,7 @@ export default function BooksPage() {
                         <motion.div className="absolute inset-0 flex items-center justify-center"
                           style={{ background:"rgba(112,9,15,.85)" }}
                           initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:.22 }}>
-                          <motion.a href={book.amazonUrl}
+                          <motion.a href={book.amazon_url}
                             className="flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2.5"
                             style={{ background:"#fff", color:"#70090F" }}
                             initial={{ y:8, opacity:0 }} animate={{ y:0, opacity:1 }} transition={{ delay:.06 }}
@@ -99,7 +105,7 @@ export default function BooksPage() {
                     style={{ fontFamily:"'TheSeasons',Georgia,serif", color: C.INK }}>{book.title}</h3>
                   <p className="text-xs mb-3" style={{ color:"#4A4A4A" }}>{book.author}</p>
                   <p className="text-xs leading-relaxed mb-4 flex-1 line-clamp-3" style={{ color:"#4A4A4A" }}>{book.description}</p>
-                  <motion.a href={book.amazonUrl}
+                  <motion.a href={book.amazon_url}
                     className="inline-flex items-center gap-1.5 text-xs tracking-widest uppercase pb-0.5 w-fit"
                     style={{ color:"#70090F", borderBottom:`1px solid rgba(112,9,15,.4)` }}
                     whileHover={{ x:3 }} transition={{ type:"spring", stiffness:300 }}>

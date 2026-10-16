@@ -48,6 +48,17 @@ export interface Artwork {
   created_at?: string;
 }
 
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  description: string;
+  cover: string;
+  amazon_url: string;
+  category: string;
+  created_at?: string;
+}
+
 // ─── Auth helpers ─────────────────────────────────────────────────────────────
 
 const ADMIN_PASSWORD = "becoming2025";
@@ -212,6 +223,48 @@ export async function updateArtwork(
 export async function deleteArtwork(id: number): Promise<void> {
   const { error } = await supabase
     .from("artworks")
+    .delete()
+    .eq("id", id);
+  if (error) console.error(error);
+}
+
+// ─── BOOKS ────────────────────────────────────────────────────────────────────
+
+export async function getBooks(): Promise<Book[]> {
+  const { data, error } = await supabase
+    .from("books")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) { console.error(error); return []; }
+  return data ?? [];
+}
+
+export async function saveBook(
+  book: Omit<Book, "id" | "created_at">
+): Promise<Book | null> {
+  const { data, error } = await supabase
+    .from("books")
+    .insert(book)
+    .select()
+    .single();
+  if (error) { console.error(error); return null; }
+  return data;
+}
+
+export async function updateBook(
+  id: number,
+  patch: Partial<Omit<Book, "id" | "created_at">>
+): Promise<void> {
+  const { error } = await supabase
+    .from("books")
+    .update(patch)
+    .eq("id", id);
+  if (error) console.error(error);
+}
+
+export async function deleteBook(id: number): Promise<void> {
+  const { error } = await supabase
+    .from("books")
     .delete()
     .eq("id", id);
   if (error) console.error(error);

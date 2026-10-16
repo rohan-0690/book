@@ -2,60 +2,42 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { adminLogout, getBlogs, getPodcasts, getArtworks } from "@/lib/store";
+import { adminLogout, getBlogs, getPodcasts, getArtworks, getBooks } from "@/lib/store";
 import { BookOpen, Headphones, Palette, LogOut, ExternalLink, PenSquare } from "lucide-react";
 
 const B = "#70090F", B2 = "#560008", BL = "#FFE9DF", IV = "#F8F6E7", CH = "#2C2C2C";
 
 const sections = [
-  {
-    href:  "/admin/blogs",
-    icon:  <PenSquare size={28} />,
-    label: "Blogs",
-    desc:  "Manage journal articles and stories",
-    color: B,
-  },
-  {
-    href:  "/admin/podcasts",
-    icon:  <Headphones size={28} />,
-    label: "Podcast",
-    desc:  "Manage podcast and YouTube episodes",
-    color: "#2C2C2C",
-  },
-  {
-    href:  "/admin/art",
-    icon:  <Palette size={28} />,
-    label: "Art Collective",
-    desc:  "Manage the gallery artworks",
-    color: "#3D1F0D",
-  },
+  { href: "/admin/blogs",    icon: <PenSquare size={28} />, label: "Blogs",         desc: "Manage journal articles and stories",  color: B },
+  { href: "/admin/podcasts", icon: <Headphones size={28} />, label: "Podcast",      desc: "Manage podcast and YouTube episodes",  color: "#2C2C2C" },
+  { href: "/admin/art",      icon: <Palette size={28} />,   label: "Art Collective", desc: "Manage the gallery artworks",         color: "#3D1F0D" },
+  { href: "/admin/books",    icon: <BookOpen size={28} />,  label: "Books",          desc: "Manage the reading list and library", color: "#1A3A2A" },
 ];
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [counts, setCounts] = useState({ blogs: 0, podcasts: 0, artworks: 0 });
+  const [counts, setCounts] = useState({ blogs: 0, podcasts: 0, artworks: 0, books: 0 });
 
   useEffect(() => {
-    Promise.all([getBlogs(), getPodcasts(), getArtworks()]).then(([blogs, podcasts, artworks]) => {
-      setCounts({ blogs: blogs.length, podcasts: podcasts.length, artworks: artworks.length });
+    Promise.all([getBlogs(), getPodcasts(), getArtworks(), getBooks()]).then(([blogs, podcasts, artworks, books]) => {
+      setCounts({ blogs: blogs.length, podcasts: podcasts.length, artworks: artworks.length, books: books.length });
     });
   }, []);
 
-  function handleLogout() {
-    adminLogout();
-    router.replace("/admin");
-  }
+  function handleLogout() { adminLogout(); router.replace("/admin"); }
 
   const statCards = [
-    { label: "Total Blogs",    value: counts.blogs },
-    { label: "Podcast Episodes", value: counts.podcasts },
-    { label: "Artworks",       value: counts.artworks },
+    { label: "Total Blogs",       value: counts.blogs },
+    { label: "Podcast Episodes",  value: counts.podcasts },
+    { label: "Artworks",          value: counts.artworks },
+    { label: "Books",             value: counts.books },
   ];
 
   return (
     <div className="min-h-screen" style={{ background: IV }}>
       {/* Top bar */}
-      <header className="sticky top-0 z-40 h-[64px] flex items-center justify-between px-5 sm:px-8" style={{ background: CH, borderBottom: `2px solid ${B}` }}>
+      <header className="sticky top-0 z-40 h-[64px] flex items-center justify-between px-5 sm:px-8"
+        style={{ background: CH, borderBottom: `2px solid ${B}` }}>
         <div className="flex items-center gap-3">
           <span className="text-xl" style={{ fontFamily: "'TheSeasons',Georgia,serif", color: BL, letterSpacing: "0.08em" }}>Become.ing</span>
           <span className="hidden sm:block text-[10px] tracking-[.3em]" style={{ color: "rgba(255,233,223,.4)" }}>/ Admin</span>
@@ -89,7 +71,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-5 mb-10 sm:mb-14">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-5 mb-10 sm:mb-14">
           {statCards.map(s => (
             <div key={s.label} className="p-5 sm:p-7" style={{ background: "#fff", borderTop: `3px solid ${B}` }}>
               <p className="text-3xl sm:text-4xl mb-1" style={{ fontFamily: "'TheSeasons',Georgia,serif", color: CH }}>{s.value}</p>
@@ -99,7 +81,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Section cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {sections.map(sec => (
             <Link key={sec.href} href={sec.href}
               className="group flex flex-col p-7 sm:p-8 transition-all duration-300"
@@ -124,6 +106,7 @@ export default function DashboardPage() {
               { href: "/blogs",   label: "View Blogs" },
               { href: "/podcast", label: "View Podcast" },
               { href: "/art",     label: "View Gallery" },
+              { href: "/books",   label: "View Books" },
             ].map(l => (
               <Link key={l.href} href={l.href} target="_blank"
                 className="inline-flex items-center gap-1.5 text-[10px] tracking-[.25em] px-4 py-2.5 transition-colors"
