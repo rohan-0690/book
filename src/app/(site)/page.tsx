@@ -235,9 +235,9 @@ export default function Home() {
               </motion.div>
             </div>
           </SectionReveal>
-          {featuredPost && <SectionReveal delay={80}><div className="mb-6 sm:mb-8"><BlogCard post={featuredPost} featured /></div></SectionReveal>}
+          {featuredPost && <SectionReveal delay={80}><div className="mb-6 sm:mb-8"><BlogCard post={{ ...featuredPost, readTime: featuredPost.read_time }} featured /></div></SectionReveal>}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {recentPosts.map((p,i)=>(<SectionReveal key={p.id} delay={i*100}><BlogCard post={p} /></SectionReveal>))}
+            {recentPosts.map((p,i)=>(<SectionReveal key={p.id} delay={i*100}><BlogCard post={{ ...p, readTime: p.read_time }} /></SectionReveal>))}
           </div>
           <div className="mt-8 text-center sm:hidden">
             <Link href="/blogs" className="inline-block text-xs tracking-[.3em] px-8 py-3" style={{ border:`1px solid ${B}`,color:B }}>All Articles</Link>
