@@ -15,9 +15,13 @@ export default function BlogCard({ post, featured = false }: { post: Post; featu
       <article className="group grid grid-cols-1 lg:grid-cols-2 overflow-hidden"
         style={{ background: "#FFE9DF" }}>
         <div className="relative overflow-hidden" style={{ height: "320px" }}>
-          <Image src={post.image} alt={post.title} fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width:1024px) 100vw, 50vw" />
+          {post.image ? (
+            <Image src={post.image} alt={post.title} fill unoptimized
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width:1024px) 100vw, 50vw" />
+          ) : (
+            <div className="w-full h-full" style={{ background: "#FFE9DF" }} />
+          )}
           <div className="absolute top-4 left-4 z-10">
             <span className="text-white text-xs tracking-widest uppercase px-3 py-1"
               style={{ background: "#70090F" }}>Featured</span>
@@ -49,9 +53,13 @@ export default function BlogCard({ post, featured = false }: { post: Post; featu
       viewport={{ once: true }} transition={{ duration: .7, ease: [.22, 1, .36, 1] }}
       whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(112,9,15,.1)" }}>
       <div className="relative flex-shrink-0 overflow-hidden" style={{ height: "220px" }}>
-        <Image src={post.image} alt={post.title} fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width:640px) 100vw, (max-width:1200px) 50vw, 33vw" />
+        {post.image ? (
+          <Image src={post.image} alt={post.title} fill unoptimized
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width:640px) 100vw, (max-width:1200px) 50vw, 33vw" />
+        ) : (
+          <div className="w-full h-full" style={{ background: "#FFE9DF" }} />
+        )}
         <div className="absolute top-3 left-3 z-10">
           <span className="text-white text-xs tracking-widest uppercase px-2.5 py-1"
             style={{ background: "#70090F" }}>{post.category}</span>
