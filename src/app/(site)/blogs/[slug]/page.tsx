@@ -47,7 +47,7 @@ export default async function BlogPost({ params }:Props) {
             <span style={{ color:"#70090F" }}>·</span>
             <span>{post.date}</span>
             <span style={{ color:"#70090F" }}>·</span>
-            <span>{post.readTime}</span>
+            <span>{post.read_time}</span>
           </div>
         </div>
       </section>

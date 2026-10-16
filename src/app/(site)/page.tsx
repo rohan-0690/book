@@ -299,12 +299,12 @@ export default function Home() {
                 <p className="leading-loose mb-3 sm:mb-4 text-sm sm:text-[15px] font-light" style={{ color:ST }}>{latestEpisode.description}</p>
                 <p className="text-[10px] tracking-[.25em] mb-6 sm:mb-8" style={{ color:B }}>{latestEpisode.date} · {latestEpisode.duration}</p>
                 <div className="flex flex-wrap gap-2 sm:gap-3">
-                  <motion.a href={latestEpisode.youtubeUrl}
+                  <motion.a href={latestEpisode.youtube_url}
                     className="inline-flex items-center gap-2 text-white text-[10px] tracking-[.25em] px-4 sm:px-5 py-2.5 sm:py-3"
                     style={{ background:B }} whileHover={{ scale:1.03 }} whileTap={{ scale:.97 }}>
                     <Play size={12} /> Watch on YouTube
                   </motion.a>
-                  <motion.a href={latestEpisode.spotifyUrl}
+                  <motion.a href={latestEpisode.spotify_url}
                     className="inline-flex items-center gap-2 text-[10px] tracking-[.25em] px-4 sm:px-5 py-2.5 sm:py-3"
                     style={{ border:`1px solid ${B}`,color:B }} whileHover={{ scale:1.03 }} whileTap={{ scale:.97 }}>
                     <Headphones size={12} /> Listen
